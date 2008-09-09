@@ -1,0 +1,47 @@
+The ti (TimeIndex) and tis (Time Indexed Series) classes in the 
+package provide an alternative to the somewhat inflexible ts class in the
+standard R stats package. The tis class maps very closely to the FAME notion
+of what a time series is.  
+
+.Rprofile CONFIGURATION
+
+Your .Rprofile should look something like this:
+
+options(defaultPackages = c(getOption("defaultPackages"), "tis"))
+.First.sys()
+.First <- function(){
+  options(error = quote(recover()), locatorBell = FALSE)
+  ps.options(pointsize = 10)
+  ## print startup message and finish
+  cat(date(), " R started in", getwd(), "by", user(), "with search path\n")
+  print(search())
+}
+
+The ordering of package loading is important. tis (this pkg) has new
+implementations of some functions found in the stats and base packages, so it
+must appear on the search() list ahead of them.  The standard .First.sys()
+proceeds in order through the defaultPackages list, loading each package in
+turn to the second position on the search list.  Putting tis last on the
+defaultPackages list means it ends up in position 2 in front of the other packages.
+
+.First.sys() loads the default packages.  Normally, the R startup sequence
+runs .First.sys() only after it has run .First(), but this is backwards, since it
+implies that code in .First() can not make use of the functionality supplied
+by packages.  So run .First.sys() before running .First().
+
+Setting Default Frequencies: 
+
+Aping the FAME DBMS, tis has seven weekly frequencies for weeks ending on
+Sunday, Monday, and it has 12 annual frequencies, for years ending on the last
+day of each of the 12 months. There are also multiple biweekly, bimonthly and
+semiannual frequencies.  
+At any time you can use the function setDefaultFrequencies() to change which
+actual frequencies the strings "weekly", "biweekly", "bimonthly",
+"quarterly", "semiannual" and "annual" refer to.   
+
+LAGS:
+
+The lag(x, k) function says that a series lagged by a positive k starts
+earlier.  The opposite is true for the Lag function in this package, to
+maintain consistency with the common usage of 'first lag, second lag' and so
+on in econometrics.
