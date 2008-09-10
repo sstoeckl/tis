@@ -401,6 +401,11 @@ period <- function(z){
   else NULL
 }
 
+basePeriod <- function(x){
+  nTif <- tif(x)
+  asTi(nTif * 1e10)
+}
+
 as.character.ti <- function(x, ...){
   j <- jul(x)
   ymds <- as.character(ymd(floor(j)))
@@ -594,20 +599,55 @@ POSIXlt.ti      <- function(x, ...) as.POSIXlt(POSIXct(x, ...))
 POSIXlt.POSIXt  <- function(x, ...) as.POSIXlt(x, ...)
 POSIXlt.default <- function(x, ...) POSIXlt(jul(x), ...)
 
+baseYmd <- function(tif){
+  nTif <- tif(tif)
+  if(between(nTif, 1001, 1050)){
+    c(## daily, business day
+      18991230, 18991229,
+      ## wsunday thru wsaturday
+      18991218:18991224,
+      ## tenday
+      18991221,
+      ## reserves
+      18991221,
+      ## biweekly1Sunday thru biweekly2Saturday
+      18991211:18991224,
+      ## semimonthly and monthly
+      18991215, 17991201,
+      ## bimonth1 and bimonth2
+      rep(17991101, 2),
+      ## quarterly
+      rep(17991001, 3),
+      ## annjanuary thru annnovember
+      100*(159802:159812) + 1,
+      ## anndecember
+      15990101,
+      ## sannjuly thru sannnovember
+      rep(15990701, 6))[nTif - 1000]      
+  }
+  else {
+    if(between(nTif, 2000, 4900)) 19800101
+    else stop(paste("unknown nTif:", nTif))
+  }
+}
+
 ## workhorse functions that convert ti's back and forth to ymd and jul
 julToTi <- function(jul, tif, must.handle=F){
   nTif <- tif(tif)
   j <- unclass(jul)
-
+  if(any(jul2ymd(jul) < baseYmd(nTif)))
+    stop("jul date too early for tif")
+  
   halfSecond <- 1/(86400*2)
   if(!isIntradayTif(nTif))
     j <- floor(j + halfSecond)
 
+      
   if(between(nTif, 1001, 1009) || between(nTif, 1011, 1025)){
+    
     period <- switch(nTif - 1e3,  ## handle day-based freqs
                      ## 1 = daily
                      j - 2415019,
-
                      ## 2 = business day
                      { 
                        dow <- julToWeekday(j)
@@ -683,6 +723,8 @@ ymdToTi <- function(ymd, tif, must.handle=F){
   day    <- rawYmd %% 100
   
   nTif <- tif(tif)
+  if(any(rawYmd < baseYmd(nTif)))
+    stop("ymd too early for tif")
   if(nTif == 1010){ ## tenday
     period <- 1 + 36*(year-1900) + 3*(month-1) + (day>10) + (day>20)
     ans <- asTi(1e10*nTif + period)
@@ -969,7 +1011,7 @@ tif.default <- function(x, freq = NULL, ...){
       if(any(is.na(ans))) stop("no such tif")
       else return(ans)
     }
-    else stop("arg must be ti, tis, or ts")
+    else stop("arg must be ti, tis, ts, tif, or tifName")
   }
 }
 

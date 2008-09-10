@@ -1,47 +1,110 @@
-The ti (TimeIndex) and tis (Time Indexed Series) classes in the 
-package provide an alternative to the somewhat inflexible ts class in the
-standard R stats package. The tis class maps very closely to the FAME notion
-of what a time series is.  
+The ti (Time Index) and tis (Time Indexed Series) classes in the 
+package provide date arithmetic facilities and an alternative to the somewhat
+inflexible ts class in the standard R stats package. 
 
-.Rprofile CONFIGURATION
+Time Indexes (ti class)
 
-Your .Rprofile should look something like this:
+A time index has two parts: a tif (Time Index Frequency) code and a period.  tif
+codes all lie in the open interval (1000..5000) and the period is a
+nonnegative number less than 1e10.  The ti encodes both, as for any ti z
 
-options(defaultPackages = c(getOption("defaultPackages"), "tis"))
-.First.sys()
-.First <- function(){
-  options(error = quote(recover()), locatorBell = FALSE)
-  ps.options(pointsize = 10)
-  ## print startup message and finish
-  cat(date(), " R started in", getwd(), "by", user(), "with search path\n")
-  print(search())
-}
+unclass(z) == (tif(z) * 1e10) + period(z)
 
-The ordering of package loading is important. tis (this pkg) has new
-implementations of some functions found in the stats and base packages, so it
-must appear on the search() list ahead of them.  The standard .First.sys()
-proceeds in order through the defaultPackages list, loading each package in
-turn to the second position on the search list.  Putting tis last on the
-defaultPackages list means it ends up in position 2 in front of the other packages.
+Each tif has a particular base period (the time period where period(z) == 0).
+For example, the base period for an anndecember (annual December) ti is the
+year ending December 31, 1599.  Periods before the base period cannot be
+represented by instances of the ti class.
 
-.First.sys() loads the default packages.  Normally, the R startup sequence
-runs .First.sys() only after it has run .First(), but this is backwards, since it
-implies that code in .First() can not make use of the functionality supplied
-by packages.  So run .First.sys() before running .First().
+If x and y are ti objects with the same tif, then 
+
+x - y == period(x) - period(y)
+
+and
+
+x + (period(y) - period(x)) == y 
+
+are both TRUE, so you can use ti's for various calendrical calculations. 
+
+A jul class is also provided for Julian date-time objects. The jul()
+constructor can create a jul from an ssDate (spreadsheet date), a
+POSIXct or POSIXlt object, a ti object, a decimal time (like 2007.5), a
+yyyymmdd number, a Date, or anything that can be coerced to a Date by
+as.Date.  The ymd() function and its derivatives (year(), month(), day(), etc.)
+work on anything that jul() can handle.
+
+
+Time Indexed Series (tis class)
+
+The tis class maps very closely to the FAME (http://www.sungard.com/Fame/) 
+database notion of what a time series is.  A tis (Time Indexed Series) is
+vector or matrix indexed by a ti.  If x is a tis, then start(x) gives the ti
+for the first observation, and [start(x) + k] is the ti for the k'th
+observation, while end(x) gives the ti for the last observation.  
+
+You can replace, say, the 5'th observation in a tis x by
+
+xstart <- start(x)
+x[xstart + 4] <- 42
+
+and of course the [ operator also works with a ti.  So if you want the value
+of the daily series x from July 3, 1998, you can get it with
+
+x[ti(19980703, "daily")]
+
+provided, of course, that ymd(start(x)) <= 19980703 <= ymd(end(x)).
+
+Numerous methods for tis objects are provided:
+> methods(class = "tis")
+ [1] aggregate.tis*     as.data.frame.tis* as.matrix.tis*     as.tis.tis*       
+ [5] as.ts.tis*         cbind.tis*         cummax.tis*        cummin.tis*       
+ [9] cumprod.tis*       cumsum.tis*        cycle.tis*         deltat.tis*       
+[13] diff.tis*          edit.tis*          end.tis*           frequency.tis*    
+[17] lag.tis*           lines.tis*         Ops.tis*           points.tis*       
+[21] print.tis*         RowMeans.tis*      RowSums.tis*       start.tis*        
+[25] tifName.tis*       tif.tis*           time.tis*          [<-.tis*          
+[29] [.tis*             ti.tis*            t.tis              window.tis*       
+
+as well as tisMerge() and tisPlot().  The convert() function change create
+series of different frequencies from a given series in ways both more powerful
+and more flexible than aggregate() can.
+
+
 
 Setting Default Frequencies: 
 
-Aping the FAME DBMS, tis has seven weekly frequencies for weeks ending on
+Like the FAME DBMS, the ti class has seven weekly frequencies for weeks ending on
 Sunday, Monday, and it has 12 annual frequencies, for years ending on the last
 day of each of the 12 months. There are also multiple biweekly, bimonthly and
 semiannual frequencies.  
 At any time you can use the function setDefaultFrequencies() to change which
 actual frequencies the strings "weekly", "biweekly", "bimonthly",
-"quarterly", "semiannual" and "annual" refer to.   
+"quarterly", "semiannual" and "annual" refer to.  Note (as shown by
+args(setDefaultFrequencies)) that if you don't specify some other frequencies
+to setDefaultFrequencies(), you'll get default weeks ending on Monday and
+default biweeks ending on the second Wednesday.  I chose these because they
+are the weeks and biweeks used most often (for money and reserves data) in my
+section at the Federal Reserve Board.  You might want to use something like
+
+setHook(packageEvent("tis", "onLoad"), tis::setDefaultFrequencies(yourArgsGoHere))
+
+in your .First() to automatically set the defaults up the way you want them
+whenever this package is loaded.
+
 
 LAGS:
 
-The lag(x, k) function says that a series lagged by a positive k starts
+The stats::lag(x, k) function says that a series lagged by a positive k starts
 earlier.  The opposite is true for the Lag function in this package, to
 maintain consistency with the common usage of 'first lag, second lag' and so
 on in econometrics.
+
+tisFilter:
+
+The stats::filter() function coerces it's argument to a "ts" time series and
+returns a "ts".  For "tis" and "zoo" series, this is not right.  Both I and
+the author of the zoo package have requested that stats::filter be made an S3
+generic with the current version renamed as filter.default.  This would allow
+zoo and tis to define filter.zoo and filter.tis such that filter(aZooOrTis)
+would do the right thing.  We are hopeful that this will happen soon.
+Meanwhile, tisFilter() should be used to filter() a tis.
+

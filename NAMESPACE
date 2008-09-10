@@ -4,7 +4,7 @@ import(utils)
 useDynLib(tis)
 export(asJul, asTi, assignList,
        as.jul, as.list.keepClass, as.ssDate,
-       as.ti, as.tis, basis, "basis<-", between,
+       as.ti, as.tis, basePeriod, basis, "basis<-", between,
        blanks, columns, convert, couldBeTi,
        currentSunday, currentMonday, currentTuesday, currentWednesday,
        currentThursday, currentFriday, currentSaturday,

@@ -9,10 +9,11 @@
 \alias{tifName.ti}
 \alias{tifName.tis}
 \alias{period}
+\alias{basePeriod}
 \title{ Time Index Frequencies and Periods}
 \description{
   Return the tif code of an object, the name associated with a tif code,
-  or the period number of a time index.
+  the period number of a time index, or the first .
 }
 \usage{
 tif(x, \dots)
@@ -25,6 +26,7 @@ tifName(s)
 \method{tifName}{ti}(s)
 \method{tifName}{tis}(s)
 period(z)
+basePeriod(x)
 }
 \arguments{
   \item{x}{
@@ -61,7 +63,10 @@ period(z)
 
   \code{period} returns a vector like \code{z} giving the number of
   periods elapsed since the first period defined for its argument's
-  frequency.  
+  frequency.
+
+  \code{basePeriod} returns the \code{ti} for the first period defined
+  for \code{tif(x)}.
 }
 \author{ Jeff Hallman }
 \seealso{ \code{\link{ti}}, \code{\link{frequency}}}
