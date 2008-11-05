@@ -1,0 +1,9 @@
+Changes in Version 1.2
+
+  o better handling of ti objects with some NA values.  Thanks to Chuck
+    Mikolajczak for pointing out the problem.
+
+  o the observed attribute of a tis can now be one of "beginning", "ending",
+    "summed", "averaged", "annualized", "high", or "low".  The last two are new,
+    and denote series for which only the high or low value over a period is
+    recorded. The convert() function can work with the new attributes.

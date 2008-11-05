@@ -22,11 +22,13 @@ convert(x, tif, method = "constant", observed. = observed(x),
   }
   \item{method}{
 	method by which the conversion is done: one of "discrete",
-	"constant", "linear", or "cubic".
+	"constant", "linear", or "cubic".  Note that this argument is
+	effectively ignored if \code{observed.} is "high" or "low", as the
+	"discrete" method is the only one supported for that setting. 
   }
   \item{observed.}{
 	"observed" attribute of the input series: one of "beginning", "end",
-	"summed", "annualized", or "averaged".  If this argument is not
+	"high", "low", "summed", "annualized", or "averaged".  If this argument is not
 	supplied and observed(\code{x}) != NULL it will be used.  The output
 	series will also have this "observed" attribute.
   }
@@ -58,24 +60,28 @@ convert(x, tif, method = "constant", observed. = observed(x),
   input series to create a lower frequency output series is known as
   \code{aggregation}. Doing the opposite is known as \code{disaggregation}.
 
+  If observed == "high" or "low", the "discrete" method is always used.
+  
   Disaggration for "discrete" series: (i) for observed == "beginning"
   ("end"), the first (last) output period that begins (ends) in a
   particular input period is assigned the value of that input period.
   All other output periods that begin (end) in that input period are NA.
-  (ii) for observed == "summed" or "averaged", all output periods that
+  (ii) for observed == "high", "low", "summed" or "averaged", all output periods that
   end in a particular input period are assigned the same value.  For
   "summed", that value is the input period value divided by the number
-  of output periods that end in the input period, while for an
-  "averaged" series, the output period values are the same as the
+  of output periods that end in the input period, while for "high",
+  "low" and "averaged" series, the output period values are the same as the
   corresponding input period values.  
 
   Aggregation for "discrete" series: (i) for observed == "beginning"
   ("end"), the output period is assigned the value of the first (last)
   input period that begins (ends) in the output period. (ii) for
-  observed == "summed" ("averaged"), the output value is the sum
-  (average) of all the input values for periods that end in the output
-  period. 
-
+  observed == "high" ("low"), the output period is assigned the value of
+  the maximum (minimum) of all the input values for periods that end in
+  the output period. (iii) for observed == "summed" ("averaged"), the
+  output value is the sum (average) of all the input values for periods
+  that end in the output period.
+  
   Methods "constant", "linear", and "cubic" all work by constructing a
   continuous function F(t) and then reading off the appropriate
   point-in-time values if observed == "beginning" or "end", or by

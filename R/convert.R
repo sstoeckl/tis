@@ -9,14 +9,18 @@ convert <- function(x, tif, method = "constant", observed. = observed(x),
   m <- ncol(x)
   idates <- ti(x)
 
+  method. <- match.arg(method, c("discrete", "constant", "linear", "cubic"))
+
   ## make sure basis. and observed. are set to proper values
   if(is.null(observed.)) observed. <- "averaged"
+  observed(x) <- observed.
+  observed.   <- observed(x)
+  if(observed. %in% c("high", "low"))
+    method. <- "discrete"
+  
   if(is.null(basis.))    basis.    <- "daily"
-  observed(x) <- observed. <- match.arg(observed.,
-                                        c("beginning", "ending", "summed",
-                                          "averaged", "annualized"))
-  basis(x) <- basis. <- match.arg(basis., c("daily", "business"))
-  method. <- method. <- match.arg(method, c("discrete", "constant", "linear", "cubic"))
+  basis(x) <- basis.
+  basis.   <- basis(x)
 
   bTif <- basis(x)
   xTif <- tif(x)
@@ -30,6 +34,8 @@ convert <- function(x, tif, method = "constant", observed. = observed(x),
       agg.fun <- switch(observed.,
                         beginning  = function(v, arg2) v[1],
                         ending     = function(v, arg2) v[length(v)],
+                        high       = function(v, arg2) max( v, na.rm = arg2),
+                        low        = function(v, arg2) min( v, na.rm = arg2),
                         summed     = function(v, arg2) sum( v, na.rm = arg2),
                         averaged   = ,
                         annualized = function(v, arg2) mean(v, na.rm = arg2))
@@ -72,6 +78,8 @@ convert <- function(x, tif, method = "constant", observed. = observed(x),
                y[1:nrow(y),] <- rep(unclass(x)/runs, runs)
              },
              averaged = ,
+             high = ,
+             low = ,
              annualized = {
                runs <- rep(lwem - fwem + 1, ncol(x))
                y <- tis(matrix(NA, ncol = ncol(x), nrow = 1 + max(lwem) - min(fwem)),
@@ -324,8 +332,8 @@ observed <- function(x) attr(x, "observed")
   if(is.null(value))
     attr(x, "observed") <- NULL
   else attr(x, "observed") <- match.arg(value,
-                                        c("beginning", "ending", "summed",
-                                          "averaged", "annualized"))
+                                        c("beginning", "ending", "high",
+                                          "low","summed", "averaged", "annualized"))
   invisible(x)
 }
 

@@ -67,12 +67,13 @@ jul2ymd <- function(jul){
 ## From ti to others
 ti2jul <- function(ti){
   tif <- tif(ti)
-  tifLen <- length(tif)
-  if(tifLen > 1 && length(uniq <- unique(tif)) > 1){
+  if(length(uniq <- unique(tif)) > 1 || any(is.na(ti))){
     ans <- asJul(unclass(ti))
     for(u in uniq){
-      index <- tif == u
-      ans[index] <- tiToJul(ti[index])
+      if(!is.na(u)){
+        index <- tif == u & !is.na(tif)
+        ans[index] <- tiToJul(ti[index])
+      }
     }
     return(ans)
   }
@@ -81,11 +82,13 @@ ti2jul <- function(ti){
 
 ti2ymd <- function(ti){
   tif <- tif(ti)
-  if(length(uniq <- unique(tif)) > 1){
+  if(length(uniq <- unique(tif)) > 1 || any(is.na(ti))){
     ans <- unclass(ti)
     for(u in uniq){
-      index <- tif == u
-      ans[index] <- tiToYmd(ti[index])
+      if(!is.na(u)){
+        index <- tif == u & !is.na(tif)
+        ans[index] <- tiToYmd(ti[index])
+      }
     }
     return(ans)
   }
@@ -105,7 +108,7 @@ ymd2jul <- function(ymd){
   jm <- m + 1 + 12*(m <= 2)
   jul <- floor(365.25*jy) + floor(30.6001*jm) + d + 1720995;
   addfac <- (2 - floor(0.01*jy) + floor(0.0025*jy))
-  i <- ( + 31*(m + 12*y)) >= 588829
+  i <- (( + 31*(m + 12*y)) >= 588829) & (!is.na(ucymd))
   jul[i] <- jul[i] + addfac[i]
   return(jul + seconds/86400)
 }
@@ -199,12 +202,13 @@ format.jul <- function(x, ...) format(POSIXlt(x), ...)
 print.jul <- function(x, ...){
   ymds <- as.character(floor(ymd(x)))
   hmsList <- hms(x)
-  if(sum(unlist(hmsList)) > 0){
+  if(sum(unlist(hmsList), na.rm = T) > 0){
     ymds <- paste(ymds,
                   substr(format(100 + hmsList$hour), 2, 3),
                   substr(format(100 + hmsList$min), 2, 3),
                   substr(format(100 + hmsList$sec), 2, 3),
                   sep = ":")
+    if(any(naSpots <- is.na(x))) ymds[naSpots] <- as.character(NA)
   }
   names(ymds) <- names(x)
   print(ymds, quote = F, ...)
@@ -1045,7 +1049,7 @@ secondly <- function(n = 0){
 
 ## Support functions
 isLeapYear    <- function(y) y %% 4 == 0 & (y %% 100 != 0 | y %% 400 == 0)
-is.ymd        <- function(x) all(between(x, 15830101, 21991231))
+is.ymd        <- function(x) all(between(x, 15830101, 21991231), na.rm = T)
 julToWeekday  <- function(jul){
   ## Sun = 1, Sat = 7.  2415020 = Sunday, 12/31/1899
   ((unclass(jul) - 2415020) %% 7) + 1
