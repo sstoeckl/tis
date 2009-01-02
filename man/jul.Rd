@@ -68,8 +68,6 @@ is.jul(x)
   encoding from the \emph{Numerical Recipes} book, which has Jan 1, 1970
   = 2440588, and the code for converting between ymd and \code{jul}
   representations is a straightforward port of the code from that tome.
-  This also matches the MRA Splus and csh (shell script) julian date
-  routines.
 
   Adding an integer to, or subtracting an integer from a \code{jul}
   results in another \code{jul}, and one \code{jul} can be subtracted
@@ -130,7 +128,6 @@ is.jul(x)
   the end of October 1582.
 
 }
-\author{ Jeff Hallman }
 \seealso{ \code{\link{jul}}, \code{\link{ymd}}, \code{\link{ti}}, \code{\link{as.Date}}}
 \examples{
 dec31 <- jul(20041231)

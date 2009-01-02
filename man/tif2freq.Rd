@@ -12,7 +12,6 @@ tif2freq(tif)
   current date with the given \code{tif}.
 }
 \value{a number}
-\author{ Jeff Hallman }
 \seealso{\code{\link{tif}}, \code{\link{tifName}}, \code{\link{frequency}}}
 \examples{
 tif2freq("wmonday")

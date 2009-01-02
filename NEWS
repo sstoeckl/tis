@@ -1,3 +1,18 @@
+Changes in Version 1.5
+
+  o added options to how nberDates() and nber.xy() handle an ongoing recession
+
+Changes in Version 1.4
+
+  o fixed nberDates() to show latest recession
+
+Changes in Version 1.3
+
+  o cleaned up some documentation to incorrect package references and
+    references to Fed-specific stuff.
+
+  o added "tif" parameter to today() with default value "daily"
+
 Changes in Version 1.2
 
   o better handling of ti objects with some NA values.  Thanks to Chuck

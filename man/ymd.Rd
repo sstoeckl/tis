@@ -62,7 +62,6 @@ day(x, \dots)
 
   \code{ymd()} with no arguments returns today's yyyymmdd.
 }
-\author{ Jeff Hallman }
 \seealso{ \code{\link{jul}}, \code{\link{ti}}, \code{\link{as.Date}}}
 \examples{
 ymd()                            ## today's date and time

@@ -28,7 +28,7 @@ is.tis(x)
   }
    \item{start}{
 	 the time of the first observation. This can be a \code{ti} object, or
-	 anything that \code{ti(start, tif = tif, freq = frequency)}, can turn into a {ti} object. 
+	 anything that \code{ti(start, tif = tif, freq = frequency)}, can turn into a \code{ti} object. 
    }
   \item{\dots}{
 	other args to be passed to the method called by the generic
@@ -95,11 +95,7 @@ is.tis(x)
   \code{tis} and \code{as.tis} return time-indexed series.
   \code{is.tis} returns TRUE or FALSE.
 }
-\author{ Jeff Hallman }
 \note{
-  The \code{tis} class is a rewrite of the FRB Splus \code{td} class,
-  which itself was based on Jim Berry's TD series idea in Speakeasy.
-
   If the \code{index} of a \code{zoo} series is a \code{ti},
   the coercion \code{as.tis.zoo} does is trivial.  For other kinds of
   \code{zoo} series, the function \code{inferTi} tries to figure out a time
@@ -112,7 +108,7 @@ is.tis(x)
   time indexed series into a multivariate \code{tis}, while
   \code{\link{mergeSeries}} merges series, and \code{\link{convert}} and
   \code{\link{aggregate}} convert series from one frequency to another.
-  \code{\link{start.tis}} and \\code{\link{end.tis}} return \code{ti}
+  \code{\link{start.tis}} and \code{\link{end.tis}} return \code{ti}
   objects, while \code{\link{ti.tis}} returns a vector \code{ti}. There
   is a print method \code{\link{print.tis}} and several plotting
   methods, including \code{\link{lines.tis}} and \code{\link{points.tis}}.

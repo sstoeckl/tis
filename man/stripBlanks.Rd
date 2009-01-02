@@ -9,6 +9,5 @@ stripBlanks(strings)
   \item{strings}{character vector}
 }
 \value{An object like \code{strings} with no leading or trailing blanks.}
-\author{ Jeff Hallman }
 \seealso{ \code{\link{blanks}}, \code{\link{gsub}} }
 \keyword{character}

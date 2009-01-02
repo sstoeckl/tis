@@ -504,7 +504,7 @@ Ops.ti <- function (e1, e2){
 
 ## compatibility with R date classes
 format.POSIXlt <- function (x, format = "", usetz = FALSE, ...){
-  ## FRB added formats:
+  ## added formats:
   ##    "%N"    first letter of month name
   ##    "%q"    quarter number
   if(!inherits(x, "POSIXlt"))  stop("wrong class")
@@ -1186,29 +1186,6 @@ tifList <- function(){
       tl <- setDefaultFrequencies(setup = FALSE)
   }
   return(tl)
-}
-
-fameDateString <- function(xTi){
-  tif <- tif(xTi)
-  freq <- frequency(xTi)
-  ans <- character(length(xTi))
-  intraday <- isIntradayTif(tif)
-
-  if(any(intraday)){
-    intradayTif <- tif[intraday]
-    firstTif <- intradayTif[1]
-    if(length(intradayTif) > 1 && any(intradayTif != firstTif))
-      stop("intraday args must all have same frequency")
-    fmt <-paste("%d%b%Y:",
-                c("%H","%H:%M","%H:%M:%S")[(firstTif %/% 1000) - 1],
-                sep = "")
-    ans[intraday] <- format(xTi[intraday], fmt)
-  }
-  if(any(!intraday)){
-    z <- xTi[!intraday]
-    ans[!intraday] <- paste(year(z), cycle(z), sep = ":")
-  }
-  ans
 }
 
 setDefaultFrequencies <- function(weekly     = "wmonday",

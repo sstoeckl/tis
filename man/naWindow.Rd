@@ -21,7 +21,5 @@ naWindow(x, union = F)
 }
 \value{A copy of \code{x} with leading and trailing NA observations deleted.
 }
-
-\author{ Jeff Hallman }
 \seealso{ \code{\link{window}}}
 \keyword{ ts }

@@ -22,7 +22,6 @@ start(x) <- value
   \code{start(x) <- value} returns the series \code{x} shifted such that
   it's starting time is \code{value}.
 }
-\author{ Jeff Hallman }
 \note{
   \code{start} and \code{end} are generic functions with default methods
   that assume \code{x} has (or can be given) a \code{tsp} attribute.

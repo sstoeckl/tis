@@ -57,7 +57,6 @@
   and all of the remaining points will be connected with line segments
   (unless suppressed by the \code{type} argument).
 }
-\author{ Jeff Hallman }
 \seealso{ \code{\link{lines}}, \code{\link{points}}}
 \keyword{ts}
 \keyword{aplot}

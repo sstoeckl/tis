@@ -32,7 +32,6 @@
   formatting the time indexes of the observations according to the
   \code{format} string.
 }
-\author{ Jeff Hallman }
 \seealso{ \code{\link{format.ti}}, \code{\link{print.ts}}}
 \examples{
 print(tis(1:31, start = today() - 30), format = "\%b \%d, \%Y")

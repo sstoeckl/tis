@@ -18,7 +18,6 @@ isLeapYear(y)
   divisible by 400, i.e.,
   \code{y\%\%4 == 0 & (y\%\%100 != 0 | y\%\%400 == 0)}.
 }
-\author{ Jeff Hallman }
 \examples{
 isLeapYear(c(1899:2004))
 }

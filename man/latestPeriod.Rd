@@ -77,7 +77,6 @@ latestDecember(xTi = today())
 
 \value{ All return return \code{ti} objects as described in the details.
 }
-\author{ Jeff Hallman }
 \seealso{ \code{\link{ti}}, \code{\link{tif}}, \code{\link{currentWeek}}
   \code{\link{setDefaultFrequencies}}}
 \keyword{ chron }

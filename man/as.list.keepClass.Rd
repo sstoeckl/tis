@@ -15,8 +15,8 @@
 }
 \note{
   The implementation of this function is identical to
-  \code{as.list.factor}.  It is used by both \code{as.list.ti} and
-  \code{as.list.jul} in the \code{fame} package.
+  \code{as.list.factor}.  It is used in \code{as.list.ti} and
+  \code{as.list.jul}.
 }
 \seealso{ \code{\link{as.list}}}
 \examples{

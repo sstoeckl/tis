@@ -1,6 +1,5 @@
 nberDates <- function(){
-  matrix(nrow = 32,
-         ncol = 2,
+  matrix(ncol = 2,
          dimnames = list(character(0), c("Start", "End")),
          byrow = TRUE,
          data =
@@ -35,34 +34,36 @@ nberDates <- function(){
            19800201, 19800731, 
            19810801, 19821130, 
            19900801, 19910331, 
-           20010401, 20011130))
+           20010401, 20011130,
+           20080101, NA))
 }
 
-nber.xy <- function(){
+nber.xy <- function(xrange = NULL, openShade = TRUE){
   ## Returns a list of x and y coordinates that can be fed to polygon() to
-  ## draw nber shadings on the current plot.  If the last row of nberDates()
-  ## has a Start but not an End, and the Start is within the range of the
-  ## current plot, the returned list will also include a vLine element that
-  ## gives the x coordinate of the last Start. 
+  ## draw nber shadings on the current plot.  If openShade is FALSE and the
+  ## last row of nberDates() has a Start but End is NA, and the Start is
+  ## within the range of the current plot, the returned list will also include
+  ## a vLine element that gives the x coordinate of the last Start. 
   
   if(as.vector(dev.cur()) < 2) ## there is no active graphics device
 	return(list(x = NULL, y = NULL, vLine = NULL))
   
   usr <- par("usr")
-  xrange <- usr[1:2]
+  if(is.null(xrange))
+    xrange <- usr[1:2]
   yrange <- usr[3:4]
   if(par("ylog")) 
     yrange <- 10^yrange
 
   ## nberDates() returns a matrix of dates in yyyymmdd form with columns
   ## named "Start" and "End". 
-  nber <- nberDates()
+  nber <- get("nberDates", pos = 1)()
   naSpots <- is.na(nber)
   nber[!naSpots]   <- time(jul(nber[!naSpots]))
 
   ## handle case where latest recession end is NA
   finalRow <- nber[nrow(nber),]
-  if(is.na(finalRow["End"]) && finalRow["Start"] < xrange[2]){
+  if(is.na(finalRow["End"]) && (finalRow["Start"] < xrange[2]) && !openShade){
     nber <- nber[1:(nrow(nber)-1),]
     vLine <- finalRow["Start"]
   }
@@ -92,14 +93,15 @@ nber.xy <- function(){
   list(x = poly.x, y = poly.y, vLine = vLine)
 }
 
-nberShade <- function(col = grey(0.8), border = FALSE, xpd = FALSE,  ...){
+nberShade <- function(col = grey(0.8), border = FALSE, xpd = FALSE,
+                      xrange = NULL, openShade = TRUE, ...){
   dotArgs <- list(...)
-  locations <- nber.xy()
+  locations <- nber.xy(openShade = openShade, xrange = xrange)
   polyArgs <- list(x = locations$x,
-                y = locations$y,
-                col = col,
-                border = border,
-                xpd = xpd)
+                   y = locations$y,
+                   col = col,
+                   border = border,
+                   xpd = xpd)
   if(length(dotArgs) > 0)
     polyArgs <- updateList(polyArgs, dotArgs)
   do.call("polygon", polyArgs)

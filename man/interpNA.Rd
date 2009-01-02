@@ -49,7 +49,6 @@ interpNA(x, method = "constant", useTimes = F, offset = 1, rule = 2, f = 0, ...)
 }
 \value{ A \code{tis} object like \code{x} with \code{NA} values filled
   in by interpolated values.}
-\author{ Jeff Hallman }
 \seealso{ \code{\link{approxfun}}, \code{\link{splinefun}},
   \code{\link{ti}}}
 \keyword{ dplot }

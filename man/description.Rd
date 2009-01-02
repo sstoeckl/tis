@@ -22,5 +22,4 @@ documentation(x) <- value
   The setters invisibly return \code{x}, the getters return the desired
   attribute or NULL.
 }
-\author{ Jeff Hallman }
 \keyword{ attribute }

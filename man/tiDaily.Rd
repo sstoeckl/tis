@@ -25,7 +25,6 @@ tiBusiness(xTi, offset = 1)
   \code{tiBusiness} converts its first argument to a \code{jul} using the
   offset provided, and returns a "business" \code{ti} for that day.
 }
-\author{ Jeff Hallman }
 \seealso{ \code{\link{ti}}, \code{\link{jul}} }
 \keyword{ chron }
 \keyword{ ts }

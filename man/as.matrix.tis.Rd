@@ -15,6 +15,5 @@
 \value{
   A \code{tis} object with a \code{dim} attribute of length 2.
 }
-\author{ Jeff Hallman }
 \keyword{ ts }
 \keyword{ array }

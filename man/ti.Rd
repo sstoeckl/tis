@@ -53,9 +53,9 @@ couldBeTi(x, tif = NULL)
 	object.  As described in the details below, the constructor function
 	\code{ti} can deal with	several different kinds of \code{x}. 
   }
-  \item{hour}{used if and only if code{tif} is an intraday frequency }
-  \item{minute}{used if and only if code{tif} is an intraday frequency }
-  \item{second}{used if and only if code{tif} is an intraday frequency }
+  \item{hour}{used if and only if \code{tif} is an intraday frequency }
+  \item{minute}{used if and only if \code{tif} is an intraday frequency }
+  \item{second}{used if and only if \code{tif} is an intraday frequency }
   \item{\dots}{
 	other args to be passed to the method called by the generic function.
   }
@@ -131,7 +131,6 @@ couldBeTi(x, tif = NULL)
   error, and it will return the string "a" with a class attribute "ti",
   but that's not a valid time index. 
 }
-\author{ Jeff Hallman }
 \seealso{ \code{\link{jul}}, \code{\link{ymd}}, \code{\link{tif}},
   \code{\link{tifName}}, \code{\link{as.Date}}} 
 \examples{

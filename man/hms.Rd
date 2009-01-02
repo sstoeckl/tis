@@ -8,7 +8,6 @@
 \usage{
 hms(x)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{ a \code{jul} or something numeric that can be converted into
   a \code{jul} with a fractional part.}
@@ -27,7 +26,6 @@ hms(x)
   \item{seconds}{Normalized number of seconds}
   See the details.
 }
-\author{ Jeff Hallman }
 \note{Support for fractional days in \code{ti} and \code{jul} objects is
   relatively new and untested.  There is probably code lurking about
   that assumes the numeric parts of \code{ti} and \code{jul} objects are

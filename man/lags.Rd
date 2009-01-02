@@ -52,5 +52,4 @@ Lags(x, lags, name = "")
   more than one element, the returned object will have a column for each
   lag, with \code{NA}'s filling in where appropriate. 
 }
-\author{ Jeff Hallman }
 \keyword{ ts }

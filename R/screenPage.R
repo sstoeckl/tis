@@ -1,6 +1,11 @@
 screenPage <- function(head = NULL,
                        sub = NULL,
                        foot = NULL,
+                       date = FALSE,
+                       dateFormat = "%x",
+                       time = FALSE,
+                       topLeft = character(0),
+                       topRight = character(0),
                        headFont = par("font.main"),
                        subFont = par("font.sub"),
                        footFont = par("font"),
@@ -8,11 +13,9 @@ screenPage <- function(head = NULL,
                        headCex = 1.5,
                        subCex = 0.85,
                        footCex = 0.75,
+                       topLeftCex = 0.85,
                        topRightCex = 0.85,
                        footAlign = 0,
-                       date = FALSE,
-                       dateFormat = "%x",
-                       time = FALSE,
                        leftMargin = 0,
                        rightMargin = leftMargin,
                        topMargin = 0,
@@ -22,11 +25,15 @@ screenPage <- function(head = NULL,
   ## then draw the outer margin items.
   
   value <- list(head = head, sub = sub, foot = foot,
+                date = date, dateFormat = dateFormat, time = time,
+                topLeft = topLeft, topRight = topRight,
+                headFont = headFont, subFont = subFont, footFont = footFont,
                 cex = cex, headCex = headCex, subCex = subCex,
-                footCex = footCex, topRightCex = topRightCex,
-                footAlign = footAlign, date = date, time = time,
-                topMargin = topMargin, bottomMargin = bottomMargin,
-                leftMargin = leftMargin, rightMargin = rightMargin)
+                footCex = footCex,
+                topLeftCex = topLeftCex, topRightCex = topRightCex,
+                footAlign = footAlign, 
+                leftMargin = leftMargin, rightMargin = rightMargin,
+                topMargin = topMargin, bottomMargin = bottomMargin)
   
   if(length(dev.list())== 0) ## no graphics device is active
     return(value)
@@ -45,6 +52,7 @@ screenPage <- function(head = NULL,
   footAlign <- rep(footAlign, length = length(foot))
   
   ## All cex's are relative to cex
+  topLeftCex   <- cex * topLeftCex
   topRightCex  <- cex * topRightCex
   headCex <- cex * headCex
   subCex  <- cex * subCex
@@ -59,11 +67,13 @@ screenPage <- function(head = NULL,
   ## Figure top margin space
   nHead <- length(head)
   nSub <- length(sub)
+  nTopLeft  <- length(topLeft)
   nTopRight <- length(topRight)
+  topLeftSpace  <- topLeftCex * (nTopLeft + 1)
   topRightSpace <- topRightCex * (nTopRight + 1)
   subSpace <- subCex * nSub
   headSpace <- headCex * nHead
-  topSpace <- max(topRightSpace + headSpace + subSpace + 0.5)
+  topSpace <- max(max(topLeftSpace, topRightSpace) + headSpace + subSpace + 0.5)
   ## Figure additional bottom margin space
   nFoot <- length(foot)
   bottomSpace <- footCex * (nFoot + 1)
@@ -71,6 +81,12 @@ screenPage <- function(head = NULL,
   ## Set par("oma")
   oma <- par("oma")
   par(oma = c(bottomSpace + oma[1], oma[2], topSpace + oma[3], oma[4]))
+  
+  ## place topLeft
+  if(nTopLeft)
+    for(i in 1:nTopLeft)
+      mtext(text = topLeft[i], side = 3, adj = 0, outer = TRUE, cex = topLeftCex,
+            line = topSpace - i * topLeftCex)
   
   ## place topRight
   if(nTopRight)

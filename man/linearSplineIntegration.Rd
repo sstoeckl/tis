@@ -65,8 +65,6 @@ ilspline(xint, w)
 
   \code{ilspline} returns a list with components named 'x' and 'y'.
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ Jeff Hallman }
 \seealso{ \code{\link{spline}}, \code{\link{approx}}}
 \examples{
 w <- 10 + cumsum(rnorm(10))

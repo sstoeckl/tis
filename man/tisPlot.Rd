@@ -1,10 +1,9 @@
 \name{tisPlot}
 \alias{tisPlot}
-\title{ Plot time series in FRB Style }
+\title{ Plot time indexed series (tis objects)}
 \description{
-  \code{tisPlot} is a function with scads of options for creating
-  high quality time series plots. Usually used with \code{frbpage} for
-  production work.  
+  \code{tisPlot} is a function with dozens of options for creating
+  high quality time series plots. Can be used with \code{screenPage}.
 }
 \usage{
 tisPlot(..., 
@@ -88,7 +87,7 @@ tisPlot(...,
   \item{dropNA}{ if \code{TRUE}, observations with \code{NA} values are
 	dropped before calling \code{lines.default} to draw the lines and/or
 	points on the plot.  See the details section of the help for
-	\code{\link[fame:lines.tis]{lines.tis}} for why you might or might not want to do
+	\code{\link{lines.tis}} for why you might or might not want to do
 	this.  The default is \code{FALSE}.
   }  
   \item{xAxisMin}{

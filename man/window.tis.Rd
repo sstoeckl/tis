@@ -42,7 +42,6 @@
 \value{
   A \code{tis} object that starts and ends at the given times.
 }
-\author{ Jeff Hallman }
 \note{
   The replacement method \code{window<-.tis} has not been implemented.
   Use the subscript operator with a \code{ti} argument to replace values

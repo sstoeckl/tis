@@ -79,7 +79,6 @@ holidaysBetween(startTi, endTi, goodFriday = F, board = F, businessOnly = T)
   \code{holidaysBetween} returns a vector of yyyymmdd dates for holidays
   that fall within the time spanned by \code{[startTi, endTi]}.
 }
-\author{ Jeff Hallman }
 \note{ The algorithm for finding Easter dates was found somewhere on the
   web (I don't remember where) and is unbelievably complex.  It would
   probably be simpler to just celebrate the home opener of the Cleveland

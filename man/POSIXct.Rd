@@ -57,7 +57,6 @@ POSIXlt(x, \dots)
   appropriate class.  If \code{tz} was specified it will be reflected in
   the "tzone" attribute of the result.
 }
-\author{ Jeff Hallman }
 \seealso{
   \code{\link{as.POSIXct}} and \code{link{as.POSIXlt}} for the default
   conversion functions, and \link{DateTimeClasses} for details of the

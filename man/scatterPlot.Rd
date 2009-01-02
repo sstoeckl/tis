@@ -3,7 +3,7 @@
 \title{ Produce high-quality scatter plots }
 \description{
   Plotting function with scads of options for creating high quality scatter
-  plots.  Usually used with \code{frbpage} for production work.
+  plots.  Can be used with \code{screenPage}.
 }
 \usage{
 scatterPlot(x, y, 
@@ -315,7 +315,6 @@ scatterPlot(x, y,
   \code{innerCex} and \code{par}. 
   This list is useful mostly as an argument to \code{legend}.
 }
-\author{ Jeff Hallman }
 \note{
   \code{scatterPlot} is a companion to \code{tisPlot}.  Both are
   designed to be driven from a graphical user interface.

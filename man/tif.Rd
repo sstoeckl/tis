@@ -68,7 +68,6 @@ basePeriod(x)
   \code{basePeriod} returns the \code{ti} for the first period defined
   for \code{tif(x)}.
 }
-\author{ Jeff Hallman }
 \seealso{ \code{\link{ti}}, \code{\link{frequency}}}
 \examples{
 tif()                 ## returns a vector of all tif codes

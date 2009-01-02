@@ -20,7 +20,6 @@ isIntradayTif(tif)
 \note{The function does not attempt to verify if the supplied \code{tif}
   is actually valid, intraday or not.
 }
-\author{ Jeff Hallman }
 \seealso{\code{\link{hourly}}, \code{\link{minutely}}, \code{\link{secondly}}}
 \examples{
 isIntradayTif(hourly(6))

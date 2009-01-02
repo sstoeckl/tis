@@ -431,7 +431,9 @@ tisPlot <- function(## series args
   }
   ## nber shading
   if(nberShade){
-    nberArglist <- list(col = nberColor, border = nberBorder)
+    nberArglist <- list(col = nberColor,
+                        border = nberBorder,
+                        xrange = time(xDataRange))
     if(length(nberArgs) > 0)
       nberArglist <- updateList(nberArglist, nberArgs)
     do.call("nberShade", nberArglist)

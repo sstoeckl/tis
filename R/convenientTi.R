@@ -1,9 +1,9 @@
 ## The argument xTi in the functions below is a ti (time index).
 
 ## dates used in various reports, releases, etc...
-today <- function(){
+today <- function(tif = "daily"){
   ## today's date as a daily ti
-  ti(Sys.Date(), tif = "daily")
+  ti(Sys.Date(), tif = tif)
 }
 
 dayOfPeriod <- function(xTi = today(), tif = NULL){

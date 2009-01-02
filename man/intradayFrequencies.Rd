@@ -2,7 +2,7 @@
 \alias{hourly}
 \alias{minutely}
 \alias{secondly}
-\title{ R support for FAME-style Intraday frequencies }
+\title{ R support for Intraday frequencies }
 \description{
   create \code{tif} (TimeIndexFrequency) codes for hourly, minutely, and
   secondly \code{ti}'s.  
@@ -35,6 +35,5 @@ secondly(n = 0)
   86400, and be no larger than 960.
 }
 \value{ An integer \code{tif} code.}
-\author{ Jeff Hallman }
 \seealso{ \code{\link{tif}}}
 \keyword{ chron }

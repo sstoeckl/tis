@@ -71,7 +71,6 @@ tisFromCsv(csvFile, dateCol = "date", dateFormat = "\%Y\%m\%d",
 \value{A list of \code{tis} time series, one per column of the csv file.
   The list is returned invisibly if \code{save} is \code{TRUE}.
 }
-\author{Jeff Hallman}
 \seealso{ \code{\link{ti}}, \code{\link{tis}}, \code{\link{read.csv}},
   \code{\link{read.table}}} 
 \keyword{file}

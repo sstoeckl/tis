@@ -31,7 +31,6 @@
 \value{
   a character vector representing \code{x}
 }
-\author{ Jeff Hallman }
 \note{
   \code{format.POSIXlt} has been modified to understand two additional
   format symbols in addition to those documented in

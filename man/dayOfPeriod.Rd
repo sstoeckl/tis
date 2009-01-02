@@ -73,7 +73,6 @@ latestMonthDay(xTi, daynum)
   1, 2001 which was actually a holiday.  To see how to handle holidays,
   look at the \code{\link{holidays}} and \code{\link{nextBusinessDay}} help pages.
 }
-\author{ Jeff Hallman }
 \seealso{ \code{\link{ti}}, \code{\link{tif}}, \code{\link{jul}},
   \code{\link{holidays}}, \code{\link{nextBusinessDay}},
   \code{\link{previousBusinessDay}} }

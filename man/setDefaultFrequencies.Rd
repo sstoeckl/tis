@@ -1,7 +1,7 @@
 \name{setDefaultFrequencies}
 \alias{setDefaultFrequencies}
 \alias{tifList}
-\title{Return known Time Index Frequencies, Change Default Frequencies}
+\title{Return Known Time Index Frequencies, Change Default Frequencies}
 \description{A \code{tif} (Time Index Frequency) can usually be set
   either by code (a number) or by name.  \code{setDefaultFrequencies}
   sets particular frequencies for the \code{tif} names "weekly",
@@ -35,10 +35,9 @@ tifList()
   the same name) stored in the global enviroment contains the mapping of
   frequency names to frequency codes.  Running this function modifies
   the \code{tifList} vector and stores it back in the global environment.
-  It gets run with \code{setup = TRUE} when the \code{fame} package is loaded.
+  It gets run with \code{setup = TRUE} when the \code{tis} package is loaded.
   If you want different defaults, call the function sometime after that.
 }
 \value{A copy of the \code{.tifList} vector.}
-\author{ Jeff Hallman }
 \seealso{\code{\link{tifName}}}
 \keyword{ chron }

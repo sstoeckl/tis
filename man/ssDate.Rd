@@ -46,7 +46,6 @@ is.ssDate(x)
   
   \code{ssDate} with no arguments returns the \code{ssDate} for the current day.
 }
-\author{ Jeff Hallman }
 \seealso{ \code{\link{jul}}}
 \examples{
 dec31 <- ssDate(20041231)

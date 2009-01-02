@@ -43,5 +43,4 @@ growth.rate(x, start = end(x) + 1, simple = T) <- value
   percentage terms will be equal to \code{value}. \code{x} is extended
   if necessary. The modified \code{x} is invisibly returned. 
 }
-\author{ Jeff Hallman }
 \keyword{ ts }

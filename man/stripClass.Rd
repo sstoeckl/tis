@@ -20,7 +20,6 @@ stripTis(x)
   not include \code{classString}.  If the \code{class} attribute less
   \code{classString} is empty, \code{unclass(x)} is returned.
 }
-\author{ Jeff Hallman }
 \note{This function can be useful in functions that return a modified
   version of one their arguments.  For example, the \code{format.ti} method
   takes a \code{ti} (TimeIndex) as an argument and returns a character object

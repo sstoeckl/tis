@@ -27,6 +27,5 @@ mergeSeries(x, y, differences = F)
   \code{x} and \code{y}.  Where the series overlap, values from \code{y}
   are used. 
 }
-\author{ Jeff Hallman }
 \seealso{ \code{\link{cbind.tis}} }
 \keyword{ ts }

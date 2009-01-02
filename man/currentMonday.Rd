@@ -46,7 +46,6 @@ latestSunday(xTi = today())
   the most recent completed Monday-ending week that its argument falls
   into.  Ditto for the other days of the week.
 }
-\author{ Jeff Hallman }
 \seealso{ \code{\link{ti}} }
 \keyword{ chron }
 \keyword{ ts }

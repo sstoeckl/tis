@@ -28,11 +28,11 @@
   These are time series methods for the generic \code{aggregate}
   function.
 
-  \code{aggregate.ts} has been reimplemented in \code{package:fame}
+  \code{aggregate.ts} has been reimplemented in \code{package:tis}
   to insure that the resulting time series starts on
   a boundary of the new frequency.  Suppose, for example, that \code{x}
   is a monthly series starting in February 1990, \code{nfrequency} is 4,
-  and \code{FUN} is \code{mean}.  The \code{package:frb} implementation
+  and \code{FUN} is \code{mean}.  The \code{package:tis} implementation
   will return a series whose first observation is the average of the
   April, May and June observations of the input series, and the first
   element of it's \code{tsp} will be 1990.25. The quarters end in

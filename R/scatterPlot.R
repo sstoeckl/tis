@@ -62,7 +62,7 @@ scatterPlot <- function(x, y,
   if(missing(cex)) cex <- par("cex")
   ## Reset some graphical parameters
   par.old <- par(xaxs = "i", yaxs = "i", mex = 1)
-  if(par("new") == F)
+  if(par("new") == FALSE)
     plot.new()
 
   if(missing(x) && missing(y)){
@@ -144,7 +144,7 @@ scatterPlot <- function(x, y,
     if(is.null(yTickLabels))
       yTickLabels <- format(signif(yAt, 5))
   }
-  else yTickLabels <- F
+  else yTickLabels <- FALSE
 
   xAt <- NULL
   ## figure out xAt based on xTicks and xTickLocations
@@ -160,11 +160,11 @@ scatterPlot <- function(x, y,
     if(is.null(xTickLabels))
       xTickLabels <- format(signif(xAt, 5))
   }
-  else xTickLabels <- F
+  else xTickLabels <- FALSE
 
   ## By default, label only one of left and right axes
-  if(missing(labelRightAxis) && labelLeftAxis)  labelRightAxis <- F
-  if(missing(labelLeftAxis)  && labelRightAxis) labelLeftAxis  <- F
+  if(missing(labelRightAxis) && labelLeftAxis)  labelRightAxis <- FALSE
+  if(missing(labelLeftAxis)  && labelRightAxis) labelLeftAxis  <- FALSE
   
   ## FIGURE MARGINS -- includes titles, footnotes, and axes
   ## Before these can be plotted, we have to calculate the required
@@ -276,14 +276,14 @@ scatterPlot <- function(x, y,
   xmgp[2] <- 0.6*xCex - 0.5
   ymgp[2] <- 0.6*yCex - 0.2
   
-  axis(side = 1, at = xAt, labels = if(labelXTicks) xTickLabels else F,
+  axis(side = 1, at = xAt, labels = if(labelXTicks) xTickLabels else FALSE,
        lwd = axisWidth, cex.axis = xCex, tick = TRUE, tck = tck,
        mgp = xmgp)
   ## draw left and right Axes
-  axis(side = 2, at = yAt, labels = if(labelLeftTicks) yTickLabels else F,
+  axis(side = 2, at = yAt, labels = if(labelLeftTicks) yTickLabels else FALSE,
        lwd = axisWidth, cex.axis = yCex, tick = TRUE, tck = tck,
        mgp = ymgp, adj = 1, las = 1)
-  axis(side = 4, at = yAt, labels = if(labelRightTicks) yTickLabels else F,
+  axis(side = 4, at = yAt, labels = if(labelRightTicks) yTickLabels else FALSE,
        lwd = axisWidth, cex.axis = yCex, tick = TRUE, tck = tck,
        mgp = ymgp, adj = 0, las = 1)
 

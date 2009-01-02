@@ -3,9 +3,10 @@
 \alias{basis<-}
 \alias{observed}
 \alias{observed<-}
-\title{FAME time series attributes }
-\description{FAME time series have (sometimes implicit) \code{basis} and
-  \code{observed} attributes.  
+\title{Optional tis attributes }
+\description{tis series have (sometimes implicit) \code{basis} and
+  \code{observed} attributes, used when aggregating or disaggregating to
+  different frequencies.
 }
 \usage{
 basis(x)
