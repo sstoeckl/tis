@@ -1049,7 +1049,7 @@ secondly <- function(n = 0){
 
 ## Support functions
 isLeapYear    <- function(y) y %% 4 == 0 & (y %% 100 != 0 | y %% 400 == 0)
-is.ymd        <- function(x) all(between(x, 15830101, 21991231), na.rm = T)
+is.ymd        <- function(x) all(between(x, 15830101, 29991231), na.rm = T)
 julToWeekday  <- function(jul){
   ## Sun = 1, Sat = 7.  2415020 = Sunday, 12/31/1899
   ((unclass(jul) - 2415020) %% 7) + 1

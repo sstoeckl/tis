@@ -8,22 +8,24 @@
 \alias{federalHolidays}
 \alias{goodFriday}
 \alias{easter}
+\alias{inaugurationDay}
 \alias{holidaysBetween}
 \title{Holidays}
 \description{Functions that know about Federal and FRB (Federal Reserve
   Board) holidays.
 }
 \usage{
-nextBusinessDay(x, holidays = NULL, goodFriday = F, board = F)
-previousBusinessDay(x, holidays = NULL, goodFriday = F, board = F)
-isHoliday(x, goodFriday = F, board = F, businessOnly = T)
+nextBusinessDay(x, holidays = NULL, goodFriday = F, board = F, inaug = board)
+previousBusinessDay(x, holidays = NULL, goodFriday = F, board = F, inaug = board)
+isHoliday(x, goodFriday = F, board = F, inaug = board, businessOnly = T)
 isGoodFriday(x)
 isEaster(x)
-holidays(years, goodFriday = F, board = F, businessOnly = T)
+holidays(years, goodFriday = F, board = F, inaug = board, businessOnly = T)
 federalHolidays(years, board = F, businessOnly = T)
 goodFriday(years)
 easter(years)
-holidaysBetween(startTi, endTi, goodFriday = F, board = F, businessOnly = T)
+inaugurationDay(years)
+holidaysBetween(startTi, endTi, goodFriday = F, board = F, inaug = board, businessOnly = T)
 }
 \arguments{
   \item{x}{a \code{ti} time index, or something that can be turned into
@@ -35,6 +37,8 @@ holidaysBetween(startTi, endTi, goodFriday = F, board = F, businessOnly = T)
 	Default is \code{FALSE} because Good Friday is not a federal holiday.}
   \item{board}{if \code{TRUE}, the Friday preceding a Saturday NewYears,
 	Independence, Veterans or Christmas Day is considered a holiday.}
+  \item{inaug}{if \code{TRUE}, consider the U.S. Presidential
+	Inauguration Day to be a holiday, but only if it falls on a weekday.}
   \item{businessOnly}{if \code{TRUE} (the default), ignore Saturday NewYears,
 	Independence, Veterans amd Christmas Day holidays.  Has no effect if
 	\code{board} is \code{TRUE}, since that moves Saturday holidays to Friday.}
@@ -54,7 +58,13 @@ holidaysBetween(startTi, endTi, goodFriday = F, board = F, businessOnly = T)
   holiday is celebrated the next day (Monday).  If it falls on a
   Saturday, the preceding day (Friday) is a holiday for the Federal
   Reserve Board, but not for the Reserve Banks and the banking system as
-  a whole. 
+  a whole.
+
+  Presidential Inauguration day is a Federal holiday only in the DC
+  area, and then only if it falls on a weekday, so it is not included in
+  the holidays returned by \code{federalHolidays}, but it can be
+  included in several of the other functions by setting the \code{inaug}
+  argument to \code{TRUE}.
 }
 \value{
   \code{nextBusinessDay} and \code{previousBusinessDay} return
@@ -66,6 +76,10 @@ holidaysBetween(startTi, endTi, goodFriday = F, board = F, businessOnly = T)
   \code{easter} and \code{goodFriday} return numeric vectors of yyyymmdd
   dates of the appropiate holidays for each year in the \code{years}
   argument.
+
+  \code{inaugurationDay} returns a numeric vector of yyyymmdd dates of
+  U.S. Presidential Inauguration Days, if any, that fall in the years
+  given in the \code{years} argument.  
 
   \code{federalHolidays} returns a numeric vector of yyyymmdd dates
   for the federal holidays for each year in \code{years}.  The

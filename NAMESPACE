@@ -16,10 +16,10 @@ export(asJul, asTi, assignList,
        dateRange, day, dayOfMonth, dayOfPeriod, dayOfWeek, dayOfYear,
        description, "description<-", documentation, "documentation<-",
        easter, evalOrEcho, fanSeries, federalHolidays,
-       firstBusinessDayOf, firstBusinessDayOfMonth, firstDayOf,
+       firstBusinessDayOf, firstBusinessDayOfMonth, firstDayOf, fortify.tis,
        goodFriday,
        growth.rate, "growth.rate<-", hms,
-       holidays, holidaysBetween,  hourly, ilspline, inferTi,
+       holidays, holidaysBetween,  hourly, ilspline, inaugurationDay, inferTi,
        interpNA, isEaster, isGoodFriday, isHoliday,
        isIntradayTif, is.jul,
        isLeapYear, is.ssDate, is.ti, is.tis, jul,
@@ -107,6 +107,8 @@ S3method(min, jul)
 S3method(min, ssDate)
 S3method(min, ti)
 S3method(months, default)
+S3method(nberShade, default)
+S3method(nberShade, ggplot)
 S3method(Ops, jul)
 S3method(Ops, ssDate)
 S3method(Ops, ti)

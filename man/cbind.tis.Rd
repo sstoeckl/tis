@@ -48,6 +48,4 @@
   first argument in \dots in \code{as.tis()}.
 }
 \seealso{ \code{\link{cbind}}}
-\examples{
-}
 \keyword{ ts }

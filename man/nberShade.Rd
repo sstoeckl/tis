@@ -1,5 +1,6 @@
 \name{nberShade}
 \alias{nberShade}
+\alias{nberShade.default}
 \alias{nberDates}
 \alias{nber.xy}
 \alias{romerLines}
@@ -22,7 +23,8 @@
   element of the horizontal range determined by the \code{xrange}
   parameter as its end time.
   
-  \code{nberShade} shades recession areas on the current plot.  It calls
+  \code{nberShade} is a generic method for shading recession areas
+  on the current plot.  The default version calls
   \code{nber.xy} to get x and y coordinates for the areas to be shaded
   and then passes those coordinates along with its own arguments to
   \code{\link{polygon}} to do the shading.  It also draws a vertical
@@ -34,7 +36,7 @@
   contractionary.
 }
 \usage{
-nberShade(col = grey(0.8), border = FALSE, xpd = FALSE,
+\method{nberShade}{default}(col = grey(0.8), border = FALSE, xpd = FALSE,
           xrange = NULL, openShade = TRUE, ...)
 nberDates()
 nber.xy(xrange = NULL, openShade = TRUE)
@@ -83,5 +85,13 @@ romerLines()
   The Romer dates are October 1947, September 1955, December 1968,
   April 1974, August 1978, October 1979 and December 1988.
 }
-\seealso{ \code{\link{polygon}}}
+\seealso{ \code{\link{polygon}}, \code{\link{nberShade.ggplot}}}
 \keyword{ aplot }
+\examples{
+    \dontrun{
+        require("datasets")
+        plot(presidents, type='n', ylab="Presidents approval rating")
+        nberShade()
+        lines(presidents)
+    }
+}

@@ -320,6 +320,4 @@ scatterPlot(x, y,
   designed to be driven from a graphical user interface.
 }
 \seealso{ \code{\link{tisPlot}}, \code{\link{evalOrEcho}}}
-\examples{
-}
 \keyword{ hplot }

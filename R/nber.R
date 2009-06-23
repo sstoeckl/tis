@@ -93,8 +93,10 @@ nber.xy <- function(xrange = NULL, openShade = TRUE){
   list(x = poly.x, y = poly.y, vLine = vLine)
 }
 
-nberShade <- function(col = grey(0.8), border = FALSE, xpd = FALSE,
-                      xrange = NULL, openShade = TRUE, ...){
+nberShade <- function(...) UseMethod("nberShade")
+
+nberShade.default <- function(col = grey(0.8), border = FALSE, xpd = FALSE,
+                              xrange = NULL, openShade = TRUE, ...){
   dotArgs <- list(...)
   locations <- nber.xy(openShade = openShade, xrange = xrange)
   polyArgs <- list(x = locations$x,

@@ -344,7 +344,7 @@ tisPlot <- function(## series args
       d <- unclass(xRange[2]) - unclass(xRange[1])
       
       if(dfreq <= 2 || d > 6*365*86400){
-        locations <- POSIXct(jul(pretty(time(xRange))))
+        locations <- POSIXct(jul(pretty(time(xRange)))-1/24)
         return(locations[between(locations, xRange[1], xRange[2])])
       }
       if(dfreq <= 4 || d > 4*365*86400){

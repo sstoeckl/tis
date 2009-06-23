@@ -15,15 +15,15 @@ dayOfPeriod <- function(xTi = today(), tif = NULL){
 
 dayOfWeek <- function(xTi = today()){
   ## 1 = Sunday, 7 = Saturday
-  dayOfPeriod(xTi, "wsaturday")
+  (floor(unclass(jul(xTi) + 1)) %% 7) + 1
 }
 
 dayOfMonth <- function(xTi = today()){
-  dayOfPeriod(xTi, "monthly")
+  floor(ymd(xTi)) %% 100
 }
 
 dayOfYear <- function(xTi = today()){
-  dayOfPeriod(xTi, "annual")
+  floor(jul(xTi)) + 1 - jul(10000*year(xTi) + 101)
 }
 
 tiDaily <- function(xTi, offset = 1){
