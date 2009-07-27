@@ -5,7 +5,7 @@ nberShade.ggplot <- function(gg = ggplot2:::last_plot(),
                              alpha = 0.5,
                              xrange = NULL,
                              openShade = TRUE, ...){
-  yrng <- extendrange(gg$data[, as.character(gg$mapping$y)])
+  yrng <- extendrange(eval(gg$mapping$y, gg$data))
   nber.dates <- transform(data.frame(as.data.frame(nberDates()),
                                      ymin = yrng[1],
                                      ymax = yrng[2]), 

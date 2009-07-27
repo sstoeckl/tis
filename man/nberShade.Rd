@@ -88,10 +88,8 @@ romerLines()
 \seealso{ \code{\link{polygon}}, \code{\link{nberShade.ggplot}}}
 \keyword{ aplot }
 \examples{
-    \dontrun{
-        require("datasets")
-        plot(presidents, type='n', ylab="Presidents approval rating")
-        nberShade()
-        lines(presidents)
-    }
+    require("datasets")
+    plot(presidents, type='n', ylab="Presidents approval rating")
+    nberShade()
+    lines(presidents)
 }

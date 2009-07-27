@@ -1,4 +1,10 @@
-Changes in Version 1.6
+Changes in Version 1.7
+
+  o Tweaked nberShade.ggplot to work with a greater range of ggplot objects,
+    and improved examples for nberShade and fortify.tis documentation.
+    Contributed by Trevor Davis.
+
+Changes in Version 1.6 (contributed by Trevor Davis)
 
   o made nberShade() generic and added a method for ggplot objects
 

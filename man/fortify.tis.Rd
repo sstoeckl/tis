@@ -26,10 +26,9 @@
 \seealso{\link[ggplot2:fortify]{fortify}}
 \author{Trevor Davis}
 \examples{
-    \dontrun{
+    if(require("ggplot2")) {
              # Examples of plotting tis series with ggplot2
              require("datasets")
-             require("ggplot2")
 
              # univariate example
              num_discoveries <- as.tis(discoveries)

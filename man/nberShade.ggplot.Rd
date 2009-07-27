@@ -55,7 +55,7 @@
 \examples{
     \dontrun{
         require("ggplot2")
-        ggp <- ggplot(aes(x=date, y=unemploy), data=economics)
+        ggp <- ggplot(aes(x=date, y=100*unemploy/pop), data=economics)
 
         nberShade( ggp ) + xlim(as.Date("1967-01-01"), Sys.Date()) + 
         opts(legend.position="none") + geom_line() + theme_bw()
