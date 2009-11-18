@@ -1,3 +1,8 @@
+Changes in Version 1.8
+
+  o Allow fortify.tis to handle proper naming when a univariate array is 
+    converted into a tis object.  Contributed by Trevor Davis.
+
 Changes in Version 1.7
 
   o Tweaked nberShade.ggplot to work with a greater range of ggplot objects,

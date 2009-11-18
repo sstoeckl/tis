@@ -1,6 +1,6 @@
 Package: tis
 Title: Time Indexes and Time Indexed Series
-Version: 1.7
+Version: 1.8
 Author: Jeff Hallman <jhallman@frb.gov>
 Depends: R (>= 2.3)
 Enhances: zoo, ggplot2
@@ -8,6 +8,7 @@ Description: Functions and S3 classes for time indexes and time indexed
         series, which are compatible with FAME frequencies.
 Maintainer: Jeff Hallman <jhallman@frb.gov>
 License: Unlimited
+Date: 2009-11-18 07:08:43
+Packaged: 2009-11-18 18:28:59 UTC; m1jjh00
 Repository: CRAN
-Date/Publication: 2009-07-28 13:20:07
-Packaged: 2009-07-27 19:14:51 UTC; m1jjh00
+Date/Publication: 2009-11-19 13:01:06

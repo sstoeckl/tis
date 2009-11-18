@@ -1,12 +1,14 @@
-fortify.tis <- function(x, offset = 0.5,
-                        dfNames = ifelse(is.null(dim(x)), as.character(substitute(x)), NA)){
-  dfNames <- dfNames  ## force evaluation of the ifelse statement 
-  date <- as.Date(POSIXct(ti(x), offset = offset))
-  x <- as.matrix(x)
-  df <- data.frame(as.data.frame(x), date)
-  ## in univariate tis case df will have the "wrong name for variable x
-  if(!is.na(dfNames))
-    names(df) <- c(dfNames, "date")
+fortify.tis <- function (x, offset = 0.5, dfNames = NULL, timeName = "date"){
+  if(is.null(dfNames)){
+    if(length(dim(x))< 2) dfNames <- as.character(substitute(x))
+    else                  dfNames <- NA
+  }
+  assign(timeName, as.Date(POSIXct(ti(x), offset = offset)))
+  df.x <- as.data.frame(as.matrix(x))
+  df <- data.frame(df.x, get(timeName))
+
+  if(!is.na(dfNames[1])) names(df) <- c(dfNames, timeName)
+  else                   names(df) <- c(names(df.x), timeName)
+  
   return(df)
 }
-

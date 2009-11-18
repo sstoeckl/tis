@@ -3,7 +3,7 @@
 \title{Fortify a tis object}
 \description{A fortify method for tis objects }
 \usage{
-    \method{fortify}{tis}(x, offset = 0.5, dfNames=ifelse(is.null(dim(x)), as.character(substitute(x)), NA))
+    \method{fortify}{tis}(x, offset = 0.5, dfNames = NULL, timeName = "date")
 } 
 \arguments{
   \item{x}{A \code{tis} object of time series}
@@ -17,16 +17,20 @@
     and used to create the field \code{date} in the resulting data frame.
   }
   \item{dfNames}{ A character vector of the names for the \code{tis} objects contained in \code{x}. Defaults to the name of the \code{tis} object in the univariate case and the column names of the \code{tis} object in the multivariate case.}
+  \item{timeName}{ A character vector of length one with the desired name for
+    the column of dates that will be created from the \code{tis} object time index.
+    Default name is \code{"date"}.}
 }
 \details{
-  This function turns a \code{tis} object into a data frame containing the original time series plus a field of dates, called \code{date}
-  and adjusted by an \sQuote{offset},
+  This function turns a \code{tis} object into a data frame containing the 
+  original time series plus a field of dates
+  adjusted by an \sQuote{offset},
   so that the time series can be more easily plotted with \code{ggplot2}.
 }
 \seealso{\link[ggplot2:fortify]{fortify}}
 \author{Trevor Davis}
 \examples{
-    if(require("ggplot2")) {
+    if(require("ggplot2") & require("reshape")) {
              # Examples of plotting tis series with ggplot2
              require("datasets")
 
@@ -38,12 +42,14 @@
              
              # multivariate example using the "melt trick"
              Seatbelts.tis <- as.tis(Seatbelts[ , c("drivers", "front", "rear")])
-             Seatbelts.df <- fortify(Seatbelts.tis)
-             Seatbelts.dfm <- melt(Seatbelts.df, id.var = "date", variable_name="type")
-             qplot( date, value, data = Seatbelts.dfm, geom="line", 
+             Seatbelt.names <- c("Driver", "Front Seat Passenger", "Back Seat Passenger")
+             Seatbelts.df <- fortify(Seatbelts.tis, dfNames = Seatbelt.names,
+                                     timeName = "Time")
+             Seatbelts.dfm <- melt(Seatbelts.df, id.var = "Time", variable_name="type")
+             qplot( Time, value, data = Seatbelts.dfm, geom="line", 
                     group=type, colour=type, linetype=type ) + 
                  geom_vline(xintercept=as.numeric(as.Date("1983-01-31")), 
                     colour="black", linetype="dashed") +
-                 ylab("Road Casulties in the UK")
+                 ylab("Monthly Road Casulties in the UK")
     }
 }
