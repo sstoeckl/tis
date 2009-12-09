@@ -40,9 +40,11 @@ convert <- function(x, tif, method = "constant", observed. = observed(x),
                         averaged   = ,
                         annualized = function(v, arg2) mean(v, na.rm = arg2))
       
-      y <- tis(tapply(unclass(x), list(rep(odates, ncol(x)), col(x)),
-                      agg.fun, arg2 = ignore), 
-               start = odates[1])
+      y <- tis(tapply(unclass(x),
+                      list(rep(unclass(odates), ncol(x)), col(x)),
+                      agg.fun,
+                      arg2 = ignore),
+               start = odates[1]) 
       
       if(!ignore){ ## chop months with incomplete data
         ostart <- asTi(ifelse(observed. == "ending",

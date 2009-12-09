@@ -1,3 +1,10 @@
+Changes in Version 1.9
+
+  o convert() uses tapply() which calls as.factor() on a ti object. For some
+    reason, this results in NA's in R 2.10.0.  Unclassing the ti before using
+    it as a parameter to tapply fixed it.  Why factor() gives NA's for ti
+    objects is a subject for further investigation.
+
 Changes in Version 1.8
 
   o Allow fortify.tis to handle proper naming when a univariate array is 
