@@ -1,9 +1,14 @@
-naWindow <- function(x, union = F){
+naWindow <- function(x, union = F, zero = F){
+  if(zero)
+    invalid <- function(x){ is.na(x) | as.numeric(x) == 0 }
+  else
+    invalid <- is.na
+  
   if(NCOL(x) == 1)
-	valid <- !is.na(x)
+	valid <- !invalid(x)
   else {
-	if(union) valid <- !apply(is.na(x), 1, all)
-	else      valid <- !apply(is.na(x), 1, any)
+	if(union) valid <- !apply(invalid(x), 1, all)
+	else      valid <- !apply(invalid(x), 1, any)
   }
   tsx <- is.ts(x)
   if(tsx) x <- as.tis(x)

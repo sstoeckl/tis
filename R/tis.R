@@ -237,7 +237,7 @@ window.tis <- function(x, start = NULL, end = NULL, extend = FALSE, noWarn = FAL
     lo.index <- 1 + yStart - xStart
     hi.index <- lo.index + yEnd - yStart
     if(isMat) 
-      z <- x[lo.index:hi.index, drop=F]
+      z <- x[lo.index:hi.index, , drop=F]
     else 
       z <- x[lo.index:hi.index]
   }
@@ -261,7 +261,7 @@ window.tis <- function(x, start = NULL, end = NULL, extend = FALSE, noWarn = FAL
       hix.index <- 1 + xStart - xEnd
     hiz.index <- loz.index + (hix.index - lox.index + 1) - 1
     if(isMat)
-      z[loz.index:hiz.index,]<- x[lox.index:hix.index, drop = F]
+      z[loz.index:hiz.index,]<- x[lox.index:hix.index, , drop = F]
     else
       z[loz.index:hiz.index]<- x[lox.index:hix.index]
   }
@@ -286,6 +286,8 @@ as.data.frame.tis <- function (x, ...){
     as.data.frame.matrix(x, ...)
   else as.data.frame.vector(x, ...)
 }
+
+xtfrm.tis <- function(x) as.numeric(x)
 
 Ops.tis <- function(e1, e2){ 
   if(nargs() == 1) { ## unary operators
@@ -341,7 +343,7 @@ points.tis <- function(x, offset = 0.5, dropNA = FALSE, ...){
   points.default(xt, x, ...)
 }
 
-print.tis <- function(x, format = "%Y%m%d", matrix.format = F, ...){
+print.tis <- function(x, format = "%Y%m%d", matrix.format = FALSE, class = TRUE, ...){
   f <- frequency(x)
   nc <- NCOL(x)
   if((nc == 1) && ((f == 4) || (f == 12)) && !matrix.format)
@@ -355,11 +357,13 @@ print.tis <- function(x, format = "%Y%m%d", matrix.format = F, ...){
     }
     if(NROW(x) > 0) rNames <- format(ti(x), format = format)
     else            rNames <- character(0)
-    if(is.null(cNames <- dimnames(x)[[2]]))
-      cNames <- character(0)
+    if(is.null(cNames <- dimnames(x)[[2]])){
+      if(nc == 1) cNames <- ""
+      else        cNames <- character(0)
+    }
     print(matrix(unclass(x), ncol = nc, dimnames = list(rNames, cNames)))
   }
-  cat("class: tis\n")
+  if(class) cat("class: tis\n")
   invisible(x)
 }
 
@@ -431,7 +435,8 @@ cbind.tis <- function(..., union = F){
       }
       ans <- ser
     }
-    else ans <- window(ser, start = start, end = end)
+    else
+      ans <- window(ser, start = start, end = end)
     z <- cbind(z, stripTis(ans))
   }
   colnames <- unlist(argnames)
@@ -525,15 +530,20 @@ mergeSeries <- function(x, y, differences=F){
     i[i<=0] <- NA
   }
   else stop("non-numeric row index")
-
-  if(is.matrix(x)){
-    if(missing(j))
-      return(unclass(x)[i, , drop=drop])
+  z <- stripTis(x)
+  if(is.matrix(z)){
+    if(missing(j)){
+      sc <- sys.call()
+      if(length(sc) > 3 && as.character(sc[[4]]) == "")
+        return(z[i, , drop = drop])
+      else
+        return(z[i, drop=drop])
+    }
     else
-      return(unclass(x)[i, j, drop=drop])
+      return(z[i, j, drop=drop])
   }
   else
-    return(unclass(x)[i])
+    return(z[i])
 }
 
 "[<-.tis" <- function(x, i, j, ..., value){
@@ -545,8 +555,7 @@ mergeSeries <- function(x, y, differences=F){
     else           x[,j] <- value
   }
   else {
-    ii <- i
-    ## if(is.logical(i)) i <- seq(i)[i]
+    i <- i[!is.na(i)]
     if(is.numeric(i)){
       if(!is.ti(i) && couldBeTi(i, tif = tif))
         i <- asTi(i)

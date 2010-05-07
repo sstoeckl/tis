@@ -219,6 +219,8 @@ rep.jul <- function(x, times, ...) asJul(NextMethod())
 
 seq.jul <- function(...) asJul(NextMethod())
 
+xtfrm.jul <- function(x) as.numeric(x)
+
 "[.jul" <- function(x, ...) asJul(NextMethod())
 
 Ops.jul <- function (e1, e2){
@@ -300,9 +302,11 @@ print.ssDate <- function(x, ...){
   cat("class: ssDate\n")
 }
 
-rep.ssDate <- function(x, times, ...) as.ssDate(NextMethod())
-seq.ssDate <- function(...) as.ssDate(NextMethod())
-"[.ssDate" <- function(x, ...) as.ssDate(NextMethod())
+rep.ssDate   <- function(x, times, ...) as.ssDate(NextMethod())
+seq.ssDate   <- function(...) as.ssDate(NextMethod())
+xtfrm.ssDate <- function(x) as.numeric(x)
+"[.ssDate"   <- function(x, ...) as.ssDate(NextMethod())
+
 Ops.ssDate <- function(e1, e2){
   if(nargs() == 1){
     if(.Generic == "+") return(e1)
@@ -464,14 +468,16 @@ format.ti <- function(x, ..., tz = ""){
   z
 }
 
-print.ti <- function(x, ...){
-  print(as.character(x), quote = F, ...)
-  cat("class: ti\n")
+print.ti <- function(x, class = TRUE, ...){
+  print(as.character(x), quote = FALSE, ...)
+  if(class) cat("class: ti\n")
 }
 
 rep.ti <- function(x, times, ...) asTi(NextMethod())
 
 seq.ti <- function(...) asTi(NextMethod())
+
+xtfrm.ti <- function(x) as.numeric(x)
 
 "[.ti" <- function(x, ...) asTi(NextMethod())
 

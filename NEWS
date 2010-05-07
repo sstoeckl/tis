@@ -1,3 +1,19 @@
+Changes in Version 1.12
+
+  o fixed bugs in "[.tis" and "[<-.tis" reported by Abiel Reinhart.
+
+Changes in Version 1.11
+
+  o added 'zero' argument to naWindow
+
+Changes in Version 1.10
+
+  o added methods for generic function xtfrm for classes jul, ssDate, ti and
+    tis.
+
+  o print.ti() and print.tis() can now suppress the 'class:  ti' and 'class:
+    tis' strings, respectively, at the end.
+
 Changes in Version 1.9
 
   o convert() uses tapply() which calls as.factor() on a ti object. For some

@@ -5,7 +5,7 @@
   Print method for time indexed series.
 }
 \usage{
-\method{print}{tis}(x, format = "\%Y\%m\%d", matrix.format = F, ...)
+\method{print}{tis}(x, format = "\%Y\%m\%d", matrix.format = FALSE, class = TRUE, ...)
 }
 \arguments{
   \item{x}{
@@ -17,7 +17,10 @@
 	detailed in \code{format.ti}.
  }
  \item{matrix.format}{
-   TRUE or FALSE.  See details.
+   \code{TRUE} or \code{FALSE}.  See details.
+ }
+ \item{class}{
+   if(\code{TRUE} (the default), prints \code{class:  tis} at the end.
  }
  \item{\dots}{
    additional arguments that may be passed along to \code{print.ts}.
