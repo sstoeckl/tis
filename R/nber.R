@@ -35,7 +35,7 @@ nberDates <- function(){
            19810801, 19821130, 
            19900801, 19910331, 
            20010401, 20011130,
-           20080101, NA))
+           20080101, 20090630))
 }
 
 nber.xy <- function(xrange = NULL, openShade = TRUE){

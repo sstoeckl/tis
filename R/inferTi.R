@@ -4,7 +4,6 @@ inferTi <- function(dateTimes){
   naSpots <- is.na(dateTimes)
   hasNAs <- any(naSpots)
   if(all(naSpots)) stop("dateTimes are all NA")
-    
   dt <- as.POSIXct(dateTimes[!naSpots])
   dtJul <- floor(jul(dt))
   diffSeconds <- median(diff(unique(sort(unclass(dt)))))
@@ -24,8 +23,7 @@ inferTi <- function(dateTimes){
     }
     else tif <- freq2tif(freq)
   }
-  
-  dtTi <- ti(dt, tif = tif)
+  dtTi <- ti(dt - diffSeconds/2, tif = tif)
 
   if(freq < 365){
     if(median(abs(jul(dtTi) - dtJul)) > 0.5){ ## could be wrong tif
@@ -42,7 +40,7 @@ inferTi <- function(dateTimes){
       if(is.null(newTif))
         stop(paste("Could not infer tif from apparent frequency:", freq))
       else 
-        dtTi <- ti(dtJul, tif = newTif)
+        dtTi <- ti(dtJul - (diffSeconds/(2*24*60*60)), tif = newTif)
     }
   }
   ans <- numeric(length(naSpots)) + NA

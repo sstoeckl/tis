@@ -1,3 +1,11 @@
+Changes in Version 1.14
+
+  o added as.POSIXct.jul and as.POSIXct.ti methods
+
+Changes in Version 1.13
+
+  o make "[<-.tis" a bit smarter when only a single index is supplied
+
 Changes in Version 1.12
 
   o fixed bugs in "[.tis" and "[<-.tis" reported by Abiel Reinhart.

@@ -555,7 +555,12 @@ mergeSeries <- function(x, y, differences=F){
     else           x[,j] <- value
   }
   else {
-    i <- i[!is.na(i)]
+    naSpots <- is.na(i)
+    someNA <- any(naSpots)
+    if(someNA){
+      alli <- i
+      i <- i[!naSpots]
+    }
     if(is.numeric(i)){
       if(!is.ti(i) && couldBeTi(i, tif = tif))
         i <- asTi(i)
@@ -574,18 +579,31 @@ mergeSeries <- function(x, y, differences=F){
       }
     }
     else if(!is.logical(i)) stop("non-numeric, non-logical row index")
-   if(is.matrix(x)){
-      if(any(i > nrow(x))){
+    if(someNA){
+      alli[!naSpots] <- i
+      i <- alli
+    }
+    if(is.matrix(x)){
+      ## if j is missing and the call had the form
+      ## x[i]  <- value    rather than
+      ## x[i,] <- value
+      ## then set singleIndex to TRUE
+      singleIndex <- missing(j) && (length(sys.call()) == length(match.call()))
+      if((!singleIndex) && any(i > nrow(x))){
         newRows <- max(i) - nrow(x)
         x <- rbind(x, matrix(NA, newRows, ncol(x)))
       }
       if(missing(j)){
         if(is.matrix(i))  x[i] <- value
         else {
-          if(is.logical(i))
-            x[i,] <- rep(value, length = sum(i)*ncol(x))
-          else
-            x[i,] <- rep(value, length = length(i)*ncol(x))
+          if(singleIndex){
+            if(is.logical(i)) x[i] <- rep(value, length = sum(i))
+            else              x[i] <- rep(value, length = length(i))
+          }
+          else {
+            if(is.logical(i)) x[i,] <- rep(value, length = sum(i)*ncol(x))
+            else              x[i,] <- rep(value, length = length(i)*ncol(x))
+          }
         }
       }
       else x[i,j] <- value

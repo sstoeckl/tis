@@ -1,4 +1,6 @@
 \name{POSIXct}
+\alias{as.POSIXct.jul}
+\alias{as.POSIXct.ti}
 \alias{POSIXct}
 \alias{POSIXct.jul}
 \alias{POSIXct.numeric}
@@ -16,6 +18,8 @@
 \usage{
 POSIXct(x, \dots)
 POSIXlt(x, \dots)
+\method{as.POSIXct}{jul}(x, tz = "", \dots)
+\method{as.POSIXct}{ti}(x, tz = "", offset = 1, \dots)
 \method{POSIXct}{jul}(x, \dots)
 \method{POSIXct}{numeric}(x, tz = "", origin, \dots)
 \method{POSIXct}{ti}(x, offset = 1, \dots)
@@ -53,7 +57,7 @@ POSIXlt(x, \dots)
   constructor and then convert it's value to a \code{POSIXlt} object.
 }
 \value{
-  \code{POSIXct} and \code{POSIXlt} return objects of the
+  \code{as.POSIXct}, \code{POSIXct} and \code{POSIXlt} return objects of the
   appropriate class.  If \code{tz} was specified it will be reflected in
   the "tzone" attribute of the result.
 }
