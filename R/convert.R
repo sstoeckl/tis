@@ -307,11 +307,15 @@ convert <- function(x, tif, method = "constant", observed. = observed(x),
   }
   y <- do.call(paste("convert", method., sep = "."),
                list(x = x, tif = tif, bTif = bTif, ignore = ignore))
-  
-  if(wasMatrix && !is.null(xdm)) 
-    dimnames(y) <- list(character(0), xdm[[2]])
-  else
-    dimnames(y) <- dim(y) <- NULL
+
+  if(wasMatrix){
+    if(is.null(xdm)) dimnames(y) <- NULL
+    else             dimnames(y) <- list(character(0), xdm[[2]])
+  }
+  else {
+    dimnames(y) <- NULL
+    dim(y) <- NULL
+  }
   
   observed(y) <- observed.
   basis(y) <- basis.
