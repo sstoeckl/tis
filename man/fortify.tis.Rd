@@ -30,7 +30,7 @@
 \seealso{\link[ggplot2:fortify]{fortify}}
 \author{Trevor Davis}
 \examples{
-    if(require("ggplot2") & require("reshape")) {
+    if(require("ggplot2") && require("reshape")) {
              # Examples of plotting tis series with ggplot2
              require("datasets")
 

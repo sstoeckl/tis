@@ -588,7 +588,7 @@ tisPlot <- function(## series args
   ## new value
   par(append(parOnEntry, list(plt = par("plt"))))
   class(z) <- "tisPlot"
-  assign("latestPlot", value = z, env = parent.frame())
+  assign("latestPlot", value = z, envir = parent.frame())
   invisible(z)
 }
 
@@ -598,7 +598,7 @@ tisLegend <- function(..., xrel = 0.1, yrel = 0.1, xjust = 0, yjust = 1,
   if(exists("latestPlot", envir = parent.frame()))
     sp <- get("latestPlot", envir = parent.frame())
   else {
-    if(exists("latestPlot", env = globalenv()))
+    if(exists("latestPlot", envir = globalenv()))
       sp <- get("latestPlot")
     else
       stop("No latestPlot to label")

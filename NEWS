@@ -1,3 +1,17 @@
+Changes in Version 1.17
+
+  o ymdToTi() (an internal function in ti.R) for frequencies bmnovember,
+    qoctober and qnovember was giving results that were off by one period,
+    causing convert() to give wrong results when aggregating to those
+    frequencies. Thanks again to Abiel Reinhart for reporting the problem.
+
+  o changed "env = envir" to "envir = envir" in several places to avoid
+    package check complaints about partial matches
+
+Changes in Version 1.16
+
+  o more bugs in convert() reported by Abiel Reinhart
+
 Changes in Version 1.15
 
   o fixed bug in convert() reported by Abiel Reinhart

@@ -355,7 +355,7 @@ scatterPlot <- function(x, y,
   ## new value
   par(append(par.old, list(plt = par("plt"))))
   class(z) <- "scatterPlot"
-  assign("latestPlot", value = z, env = parent.frame())
+  assign("latestPlot", value = z, envir = parent.frame())
   invisible(z)
 }
 

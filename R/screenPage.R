@@ -40,7 +40,7 @@ screenPage <- function(head = NULL,
 
   plot.new()
   ## unsplit screen
-  if(length(ss <- split.screen()) != 1 || ss) close.screen(all = TRUE)
+  if(length(ss <- split.screen()) != 1 || ss) close.screen(all.screens = TRUE)
 
   par(mex = 1, cex = 1, fig = c(0, 1, 0, 1),
       omi = c(bottomMargin, leftMargin, topMargin, rightMargin))

@@ -744,15 +744,15 @@ ymdToTi <- function(ymd, tif, must.handle=F){
   if(between(nTif, 1026, 1050)){
     period <- switch(nTif - 1e3 - 25,
                      ## 26 = twicemonthly
-                     1 + 24*(year-1900) + 2*(month-1) + (day>14),
+                     1 + 24*(year-1900) + 2*(month-1) + (day>15),
                      ## 27 = monthly
                      12*(year-1800) + month,
                      ## 28 and 29 are bimonthly (nov and dec)
-                     6*(year-1800) + (month+1) %/% 2, 
+                     6*(year-1800) + (month+2) %/% 2, 
                      6*(year-1800) + (month+1) %/% 2,
                      ## 30 - 32 are quarterly (oct, nov and dec)
-                     4*(year-1800) + (month+2) %/% 3, 
-                     4*(year-1800) + (month+2) %/% 3, 
+                     4*(year-1800) + (month+4) %/% 3, 
+                     4*(year-1800) + (month+3) %/% 3, 
                      4*(year-1800) + (month+2) %/% 3,
                      ## 33 - 44 are annual (jan, feb, ..., dec)
                      1 + (year-1600) + (month > 1),
@@ -1184,10 +1184,10 @@ initialTifList <- function(){
 }
 
 tifList <- function(){
-  if(!exists(".tifList", env = globalenv()))
+  if(!exists(".tifList", envir = globalenv()))
     tl <- setDefaultFrequencies(setup = TRUE)
   else{
-    tl <- get(".tifList", env = globalenv())
+    tl <- get(".tifList", envir = globalenv())
     if(is.na(tl["weekly"]))
       tl <- setDefaultFrequencies(setup = FALSE)
   }
@@ -1203,9 +1203,9 @@ setDefaultFrequencies <- function(weekly     = "wmonday",
                                   setup = FALSE){
   if(setup) tl <- initialTifList()
   else {
-    if(!exists(".tifList", env = globalenv()))
-      assign(".tifList", initialTifList(), env = globalenv())
-    tl <- get(".tifList", env = globalenv())
+    if(!exists(".tifList", envir = globalenv()))
+      assign(".tifList", initialTifList(), envir = globalenv())
+    tl <- get(".tifList", envir = globalenv())
   }
   if(!missing(weekly) || setup)
     tl["weekly"] <- tl[weekly]
@@ -1219,6 +1219,6 @@ setDefaultFrequencies <- function(weekly     = "wmonday",
     tl[c("annual", "a")] <- tl[annual]
   if(!missing(semiannual) || setup)
     tl[c("sann", "semiannual")]  <- tl[semiannual]
-  assign(".tifList", tl, env = globalenv())
+  assign(".tifList", tl, envir = globalenv())
 }
 

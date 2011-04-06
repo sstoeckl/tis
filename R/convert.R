@@ -53,6 +53,7 @@ convert <- function(x, tif, method = "constant", observed. = observed(x),
         oend <- asTi(ifelse(observed. == "beginning", end(y),
                              oend <- ti(jul(end(x) + 1), tif) - 1))
       
+        if(ostart > oend) stop("Not enough observations to fill in an output period")
         y <- window(y, start = ostart, end = oend)
       }
     }
@@ -149,6 +150,9 @@ convert <- function(x, tif, method = "constant", observed. = observed(x),
                ostart <- ti(jul(idates[1] - 1), tif) + 1
                oend <- ti(jul(idates[n]) + 1, tif) - 1
              }
+             if(ostart > oend)
+               stop("Not enough observations to fill in an output period")
+
              odates <- seq(ostart, oend)
            
              ## Basis-day borders for the input and output series

@@ -56,7 +56,7 @@ tisFromCsv <- function(csvFile,
   colnames(zSeries) <- colnames(z)
   
   retList <- lapply(columns(zSeries), naWindow)
-  if(save) assignList(retList, env = envir)
+  if(save) assignList(retList, envir = envir)
   gc()
   
   if(save) invisible(retList)
