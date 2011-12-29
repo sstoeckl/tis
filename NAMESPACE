@@ -1,8 +1,9 @@
 import(stats)
 import(utils)
+import(graphics)
 
 useDynLib(tis)
-export(asJul, asTi, assignList,
+export(adjustableTierChart, asJul, asTi, assignList,
        as.jul, as.list.keepClass, as.ssDate,
        as.ti, as.tis, basePeriod, basis, "basis<-", between,
        blanks, columns, convert, couldBeTi, csv,
@@ -17,8 +18,7 @@ export(asJul, asTi, assignList,
        description, "description<-", documentation, "documentation<-",
        easter, evalOrEcho, fanSeries, federalHolidays,
        firstBusinessDayOf, firstBusinessDayOfMonth, firstDayOf, fortify.tis,
-       goodFriday,
-       growth.rate, "growth.rate<-", hms,
+       frColors, goodFriday, growth.rate, "growth.rate<-", hms,
        holidays, holidaysBetween,  hourly, ilspline, inaugurationDay, inferTi,
        interpNA, isEaster, isGoodFriday, isHoliday,
        isIntradayTif, is.jul,
@@ -37,10 +37,10 @@ export(asJul, asTi, assignList,
        previousBusinessDay, 
        quarter, romerLines,
        RowMeans, RowSums, rows, 
-       scatterPlot, screenPage, secondly, 
+       scatterPlot, screenPage, secondly, setColors,
        setDefaultFrequencies, ssDate,
        "start<-", stripBlanks, stripClass, stripTis,
-       ti, tiBusiness, tiDaily, tif, tifList,
+       ti, tiBusiness, tiDaily, tierChart, tif, tifList,
        tif2freq, tifName, tis, tisFilter, tisFromCsv, tisLegend, tisPlot, today, t.tis,
        tunnelSeries, updateColumns, updateList, year, ymd)
 
@@ -66,6 +66,7 @@ S3method(as.tis, tis)
 S3method(as.tis, ts)
 S3method(as.tis, zoo)
 S3method(as.ts, tis)
+S3method(barplot, tis)
 S3method(cbind, tis)
 S3method(c, jul)
 S3method(c, ssDate)
@@ -175,3 +176,5 @@ S3method(ymd, default)
 S3method(ymd, jul)
 S3method(ymd, ssDate)
 S3method(ymd, ti)
+## not exported
+## barplot2

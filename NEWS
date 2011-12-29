@@ -1,3 +1,9 @@
+Changes in Version 1.18
+
+  o added a tis method for the generic barplot() function
+
+  o moved tierChart functions from local frb package to tis package
+
 Changes in Version 1.17
 
   o ymdToTi() (an internal function in ti.R) for frequencies bmnovember,
