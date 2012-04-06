@@ -2,5 +2,5 @@ assignList <- function(aList, pos = -1, envir = as.environment(pos), inherits = 
   if(is.null(nms <- names(aList))) stop("names(aList) is NULL")
   if(any(nms == "")) stop("blank name")
   for(nm in nms)
-    .Internal(assign(nm, aList[[nm]], envir, inherits))
+    assign(x = nm, value = aList[[nm]], envir = envir, inherits = inherits)
 }

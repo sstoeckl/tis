@@ -14,10 +14,11 @@ nberShade.ggplot <- function(gg = ggplot2:::last_plot(),
   
   if( is.null(xrange) ){
     if( openShade ){
-      nber.dates[ dim(nber.dates)[1], "End"] <- Sys.Date()
-    }
-    
-  } else {
+      nr <- nrow(nber.dates)
+      if(is.na(nber.dates[nr, "End"])) nber.dates[nr, "End"] <- Sys.Date()
+    }  
+  }
+  else {
     xrange <- as.Date(xrange)
     nber.dates <- subset(nber.dates, (End > xrange[1]) | (is.na(End)))
     if(nber.dates[1, "Start"] < xrange[1]) 

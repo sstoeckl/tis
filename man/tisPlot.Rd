@@ -9,8 +9,8 @@
 tisPlot(..., 
         leftAxis = TRUE, plotType = "l",
         lineType = "solid", lineWidth = 1.5,
-        plotChar = "*", dataCex = 1,
-        color = 1, midPoints = TRUE, dropNA = FALSE,
+        plotChar = "*", dataCex = 1, color = 1,
+        midPoints = TRUE, dropNA = FALSE, xOffset = 0,
         xAxisMin = NULL, xAxisMax = NULL, xExpandBy = 0.04,
         xTickFreq = "Auto", xTickSkip = 0,
         xUnlabeledTickFreq = "None", xUnlabeledTickSkip = 0,
@@ -90,6 +90,11 @@ tisPlot(...,
 	\code{\link{lines.tis}} for why you might or might not want to do
 	this.  The default is \code{FALSE}.
   }  
+  \item{xOffset}{
+	Shifts the data points for series[i] to the right by
+	\code{xOffset[i]} days. This argument is replicated to be as long
+	as the number of series. 
+  }
   \item{xAxisMin}{
 	minimum value of the x axis. If non-NULL, this overrides the
 	calculation described in \code{xExpandBy}.

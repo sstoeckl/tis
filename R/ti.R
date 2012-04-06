@@ -520,16 +520,17 @@ format.POSIXlt <- function (x, format = "", usetz = FALSE, ...){
     else "%Y-%m-%d %H:%M:%S"
   }
   format <- gsub("%N", "@N", gsub("%q", "@q", format))
-  tmp <- .Internal(format.POSIXlt(x, format, usetz))
+  
+  tmp <- base::format.POSIXlt(x, format, usetz)
   
   if(length(grep("@q", format))){
-    qtr <- (as.numeric(.Internal(format.POSIXlt(x, "%m", usetz))) + 2) %/% 3
+    qtr <- (as.numeric(base::format.POSIXlt(x, "%m", usetz)) + 2) %/% 3
     for(i in 1:length(tmp))
     tmp[i] <- gsub("@q", qtr[i], tmp[i])
   }
   
   if(length(grep("@N", format))){
-    month <- as.numeric(.Internal(format.POSIXlt(x, "%m", usetz)))
+    month <- as.numeric(base::format.POSIXlt(x, "%m", usetz))
     for(i in 1:length(tmp))
       tmp[i] <- gsub("@N", substring(month.abb[month[i]], 1, 1), tmp[i])
   }

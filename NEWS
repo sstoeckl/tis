@@ -1,3 +1,9 @@
+Changes in Version 1.19
+
+  o added xOffset argument to tisPlot()
+
+  o fixed a bug in nberShade.ggplot() found by Matthew McCormick. Thanks, Matt.
+
 Changes in Version 1.18
 
   o added a tis method for the generic barplot() function

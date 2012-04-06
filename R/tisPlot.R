@@ -9,6 +9,7 @@ tisPlot <- function(## series args
                     color = 1,
                     midPoints = TRUE,
                     dropNA = FALSE,
+                    xOffset = 0,
                     ## x axis
                     xAxisMin = NULL,
                     xAxisMax = NULL,
@@ -146,10 +147,11 @@ tisPlot <- function(## series args
   ends     <- sapply(series, end)
   tifNames <- sapply(series, tifName)
   offsets  <- rep(ifelse(midPoints, 0.5, 1), length = nSeries)
+  xOffset  <- rep(xOffset, length = nSeries)
   xcts     <- vector("list", nSeries)
   for(i in 1:nSeries)
-    xcts[[i]] <- POSIXct(ti(series[[i]]), offset = offsets[i])
-
+    xcts[[i]] <- POSIXct(ti(series[[i]]), offset = offsets[i]) + xOffset[i]
+  
   ## Scale specific cex's by overall cex
   dataCex  <- cex * dataCex
   headCex  <- cex * headCex

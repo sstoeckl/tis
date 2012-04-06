@@ -1,11 +1,11 @@
 f49c1a61d86a02efe939c1c44b6e9013 *COPYRIGHTS
-e5f7fc336c113ac42d121bde2cbab75b *DESCRIPTION
+ff237df426da1d4d8f38177056a4d672 *DESCRIPTION
 991740df7d2d4b7bda6e1d665a8eff2c *NAMESPACE
-540ad10659c7d61d25029a21b2ff47dc *NEWS
+5edc09de4d02418e18d5f54820658431 *NEWS
 a867083d3a728e4969dbd3c205c1eeb1 *R/Lag.R
 e3405b4e53160c80f06062a70d55ed6f *R/RowSums.R
 24f2e2ccd74c80cbca326eaa08b9f331 *R/as.list.keepClass.R
-77de8777ec581f5c56df19ee9cf2e23a *R/assignList.R
+da2c0d1bb10a3ea1f1bf1c16d4c11dbc *R/assignList.R
 ac7258e7fe332124ee522eeaaa78fbd9 *R/barplot.tis.R
 6ddd7f1ecd7cf04567f49e5f69669277 *R/barplot2.R
 0ae973fc4fc41b636f71ee526c76f8ec *R/between.R
@@ -26,7 +26,7 @@ b0ae842dd4fe2f8c048cb050428ddfbf *R/inferTi.R
 aa5ea6ca8a7ed3047cfb00d361018c25 *R/lags.R
 2c1c1ca1cb30e0003444a4654ef58cf9 *R/naWindow.R
 b7e1359f3ac0e5520f4003395c2f7f50 *R/nber.R
-2857e20c226423fcff6063b60980e1a6 *R/nberShade.ggplot.R
+03a85096414d1299d362bb6dea6f9659 *R/nberShade.ggplot.R
 cdf3ec2a24c1f3dd334ef0c0ebc596c3 *R/plotWindow.R
 0c471668d5a3070418e4a6eb2e044ea1 *R/rowsAndColumns.R
 f32069f986951e0b6315420cd8f73ffd *R/scatterPlot.R
@@ -35,12 +35,12 @@ e0461a4ffb09b5d9a1c38d84af26d8a2 *R/setColors.R
 77fcb01bc85f647bcd89407e8d60e923 *R/solve.tridiag.R
 78d5c75f5506bf525025542bdaeb185a *R/stringFunctions.R
 a81d54bdb0c7cc1888e247bb659493f9 *R/stripClass.R
-98af1e3991628dbbc3ad0ada8441dde7 *R/ti.R
+72820858e544ea667fba6b9962f29cd3 *R/ti.R
 569926f7dc0b5efa4d083250ddd1d91b *R/tier.R
 a8f52e1857f4f7c57d81f282ca8cec3c *R/time.R
 3c59338abcd88d725b286a332f68cc98 *R/tis.R
 fe9f8e4ce0e4d3abe00746a39f8739ba *R/tisFromCsv.R
-3179f186b535d562b5e24f8e72bc1b83 *R/tisPlot.R
+2f88c51b4cde4c1bb8d0b8fc679536f1 *R/tisPlot.R
 89bb036a85a0051ae2f4384af06a5ca2 *R/updateColumns.R
 abe0a629989b0c62ce254e0643741f53 *R/zooStuff.R
 d39943066eb38c03f7ab9387a53a0940 *R/zzz.R
@@ -115,7 +115,7 @@ fdf1de1780542fd62b850951586194ed *man/stripBlanks.Rd
 f672e67fcd0dc45fd218723d3f9e25bf *man/tisFilter.Rd
 290f4962fc29949f72f9fe8148c89c41 *man/tisFromCsv.Rd
 f86bcc5f3655a66dbb8a034c7fcdb286 *man/tisLegend.Rd
-7cb7fedfaef221d0273443a46e515ad5 *man/tisPlot.Rd
+83ae2b4db4d998910275c73ea819cdbb *man/tisPlot.Rd
 75d5c53d7c3c4d65c175de57062a4f37 *man/today.Rd
 1e86ae5a84ecb08aaa74241b95381689 *man/updateColumns.Rd
 cee54e0e8aa057860c2460354c67a2bb *man/window.tis.Rd
