@@ -33,12 +33,13 @@
     if(require("ggplot2") && require("reshape")) {
              # Examples of plotting tis series with ggplot2
              require("datasets")
+             require("scales")
 
              # univariate example
              num_discoveries <- as.tis(discoveries)
              ggplot(data = fortify(num_discoveries, offset=0)) + 
                     geom_line(aes(x=date, y=num_discoveries)) + 
-                    scale_x_date(major="10 years")
+                    scale_x_date(breaks = date_breaks("10 years"), labels = date_format("\%Y"))
              
              # multivariate example using the "melt trick"
              Seatbelts.tis <- as.tis(Seatbelts[ , c("drivers", "front", "rear")])

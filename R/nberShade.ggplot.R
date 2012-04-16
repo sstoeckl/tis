@@ -5,6 +5,8 @@ nberShade.ggplot <- function(gg = ggplot2:::last_plot(),
                              alpha = 0.5,
                              xrange = NULL,
                              openShade = TRUE, ...){
+  Start <- End <- ymin <- ymax <-
+    "Defined here to defeat 'no visible binding' R CMD check warnings"
   yrng <- extendrange(eval(gg$mapping$y, gg$data))
   nber.dates <- transform(data.frame(as.data.frame(nberDates()),
                                      ymin = yrng[1],

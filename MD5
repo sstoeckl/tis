@@ -1,11 +1,11 @@
 f49c1a61d86a02efe939c1c44b6e9013 *COPYRIGHTS
-ff237df426da1d4d8f38177056a4d672 *DESCRIPTION
-991740df7d2d4b7bda6e1d665a8eff2c *NAMESPACE
-5edc09de4d02418e18d5f54820658431 *NEWS
+9245dedef96b83b49c84a3613d4a547b *DESCRIPTION
+4b0ca953db5102815658fd03cc6ec613 *NAMESPACE
+3657e5290d499b08bfb8bf07f6a6a297 *NEWS
 a867083d3a728e4969dbd3c205c1eeb1 *R/Lag.R
 e3405b4e53160c80f06062a70d55ed6f *R/RowSums.R
-24f2e2ccd74c80cbca326eaa08b9f331 *R/as.list.keepClass.R
-da2c0d1bb10a3ea1f1bf1c16d4c11dbc *R/assignList.R
+e5a9ac6c4a4d27bbc52d6275a0502c90 *R/asClassyList.R
+08b6833fe44e9bef8321303a3cf5dba7 *R/assignList.R
 ac7258e7fe332124ee522eeaaa78fbd9 *R/barplot.tis.R
 6ddd7f1ecd7cf04567f49e5f69669277 *R/barplot2.R
 0ae973fc4fc41b636f71ee526c76f8ec *R/between.R
@@ -26,7 +26,7 @@ b0ae842dd4fe2f8c048cb050428ddfbf *R/inferTi.R
 aa5ea6ca8a7ed3047cfb00d361018c25 *R/lags.R
 2c1c1ca1cb30e0003444a4654ef58cf9 *R/naWindow.R
 b7e1359f3ac0e5520f4003395c2f7f50 *R/nber.R
-03a85096414d1299d362bb6dea6f9659 *R/nberShade.ggplot.R
+846412e8d7d4fc04590bf080bf617d1a *R/nberShade.ggplot.R
 cdf3ec2a24c1f3dd334ef0c0ebc596c3 *R/plotWindow.R
 0c471668d5a3070418e4a6eb2e044ea1 *R/rowsAndColumns.R
 f32069f986951e0b6315420cd8f73ffd *R/scatterPlot.R
@@ -35,7 +35,7 @@ e0461a4ffb09b5d9a1c38d84af26d8a2 *R/setColors.R
 77fcb01bc85f647bcd89407e8d60e923 *R/solve.tridiag.R
 78d5c75f5506bf525025542bdaeb185a *R/stringFunctions.R
 a81d54bdb0c7cc1888e247bb659493f9 *R/stripClass.R
-72820858e544ea667fba6b9962f29cd3 *R/ti.R
+76b4e4f0d385c8fc9b1b622d2fd7f9cd *R/ti.R
 569926f7dc0b5efa4d083250ddd1d91b *R/tier.R
 a8f52e1857f4f7c57d81f282ca8cec3c *R/time.R
 3c59338abcd88d725b286a332f68cc98 *R/tis.R
@@ -51,10 +51,10 @@ d39943066eb38c03f7ab9387a53a0940 *R/zzz.R
 e654c0ccde74e7561304c9eba3ad1417 *man/aggregate.tis.Rd
 ec4444b9452752447b3d6008df23e2c5 *man/as.Date.jul.Rd
 83b5d50af2db8e891ab6b0a84040cb9c *man/as.data.frame.tis.Rd
-17d0779074763d61abb01f74b8d0d9bf *man/as.list.keepClass.Rd
-6760c3913812b1c292a559023a58cfe6 *man/as.list.ti.Rd
+8a876d14d6f577c89c282c10a6396b41 *man/as.list.ti.Rd
 ed7973840fdb8ddd1dc862d7f6e85549 *man/as.matrix.tis.Rd
 973eb7164dc6aafa26c30c2a3a41545e *man/as.ts.tis.Rd
+02204ba3ab936942adb7517df87aadb3 *man/asClassyList.Rd
 b1ed0999514f011a1e36d062026269a0 *man/assignList.Rd
 361cb613877e73fe732fba8bdc06c004 *man/barplot.tis.Rd
 7d5c1afde9575eb050691d0f1a1d41ae *man/basis.Rd
@@ -73,7 +73,7 @@ c750a6079cba4572fce1a8d348a56acd *man/dateRange.Rd
 1fcf83bca0aa10c520d9bbe6179580f1 *man/description.Rd
 8506b1c2ba3bdc172ac86346c86f300e *man/evalOrEcho.Rd
 a661a1b431a2d54947019aff239fe565 *man/format.ti.Rd
-289b38ad444a0c1af67e9eb09219bbd4 *man/fortify.tis.Rd
+faeb5d699bcbe63435160144ca3fe77b *man/fortify.tis.Rd
 7aa0135b3123bdfeb7fd466c3eb04574 *man/frColors.Rd
 f6a4f3e3b5405bf25a989e864a340a05 *man/growth.rate.Rd
 577507ff8ae98afdbcb1d885bc0299fa *man/hms.Rd

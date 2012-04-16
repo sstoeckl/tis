@@ -23,7 +23,7 @@
 \value{
   a list of one-element \code{ti} or \code{jul} objects.
 }
-\seealso{ \code{\link{as.list.keepClass}}, \code{\link{as.list}}}
+\seealso{ \code{\link{asClassyList}}, \code{\link{as.list}}}
 \examples{
 as.list(today() + 1:5)
 as.list(jul(today()) + 1:5)

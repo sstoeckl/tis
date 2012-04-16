@@ -3,8 +3,8 @@ import(utils)
 import(graphics)
 
 useDynLib(tis)
-export(adjustableTierChart, asJul, asTi, assignList,
-       as.jul, as.list.keepClass, as.ssDate,
+export(adjustableTierChart, asClassyList, asJul, asTi, assignList,
+       as.jul, as.ssDate,
        as.ti, as.tis, basePeriod, basis, "basis<-", between,
        blanks, columns, convert, couldBeTi, csv,
        currentSunday, currentMonday, currentTuesday, currentWednesday,

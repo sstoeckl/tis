@@ -1,4 +1,4 @@
-as.list.keepClass <- function(x, ...){
+asClassyList <- function(x, ...){
   res <- vector("list", length(x))
   xnames <- names(x)
   names(x) <- NULL

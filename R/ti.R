@@ -183,7 +183,7 @@ jul.default <- function(x, ...){
 as.character.jul <- function (x, ...) format(x, ...)
 
 as.list.jul <- function(x, ...){
-  as.list.keepClass(x, ...)
+  asClassyList(x, ...)
 }
 
 c.jul <- function(..., recursive = F)
@@ -431,7 +431,7 @@ as.character.ti <- function(x, ...){
 }
 
 as.list.ti <- function(x, ...){
-  as.list.keepClass(x, ...)
+  asClassyList(x, ...)
 }
 c.ti <- function(..., recursive = F)
   structure(c(unlist(lapply(list(...), unclass))), class = "ti")

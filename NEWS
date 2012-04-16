@@ -1,3 +1,11 @@
+Changes in Version 1.21
+
+  o changed name of as.list.keepClass() to asClassyList() to placate CRAN
+
+Changes in Version 1.20
+
+  o fixed bug in assignList()
+
 Changes in Version 1.19
 
   o added xOffset argument to tisPlot()

@@ -1,10 +1,10 @@
-\name{as.list.keepClass}
-\alias{as.list.keepClass}
+\name{asClassyList}
+\alias{asClassyList}
 \title{ Convert a vector into a list of objects with the same class }
 \description{
   Turns its argument into a list of elements with the same class as the argument.
 }
-\usage{as.list.keepClass(x, \dots)}
+\usage{asClassyList(x, \dots)}
 \arguments{
   \item{x}{object to be coerced or tested.}
   \item{\dots}{objects, possibly named.}
@@ -20,7 +20,7 @@
 }
 \seealso{ \code{\link{as.list}}}
 \examples{
-  as.list.keepClass(today() + 1:5)
+  asClassyList(today() + 1:5)
 }
 \keyword{list}
 \keyword{manip}
