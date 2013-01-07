@@ -105,8 +105,11 @@ federalHolidays <- function(years, board = F, businessOnly = T){
   weekday <- dayOfWeek(hols)
   if(any(weekday == 1))
     hols[weekday == 1] <- ymd(jul(hols[weekday == 1]) + 1)
-  if(board && any(weekday == 7))
+  if(board && any(weekday == 7)){
     hols[weekday == 7] <- ymd(jul(hols[weekday == 7]) - 1)
+    ## recompute weekday vector because Saturday holidays were moved to Friday
+    weekday <- dayOfWeek(hols)
+  }
   if(businessOnly){
     ## drop Saturdays (no need to drop Sundays since there aren't any)
     hols <- hols[weekday != 7]

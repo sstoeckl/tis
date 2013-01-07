@@ -12,7 +12,7 @@
 }
 \usage{
 setDefaultFrequencies(weekly     = "wmonday",
-                      biweekly   = "bw2wednesday",
+                      biweekly   = "bw1wednesday",
                       bimonthly  = "bimonthdecember",
                       quarterly  = "qdecember",
                       annual     = "anndecember",

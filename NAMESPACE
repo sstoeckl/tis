@@ -1,12 +1,12 @@
-import(stats)
 import(utils)
 import(graphics)
+import(stats)
 
 useDynLib(tis)
 export(adjustableTierChart, asClassyList, asJul, asTi, assignList,
        as.jul, as.ssDate,
-       as.ti, as.tis, basePeriod, basis, "basis<-", between,
-       blanks, columns, convert, couldBeTi, csv,
+       as.ti, as.tis, barplot2, basePeriod, basis, "basis<-", between,
+       blanks, capitalize, columns, convert, couldBeTi, csv,
        currentSunday, currentMonday, currentTuesday, currentWednesday,
        currentThursday, currentFriday, currentSaturday,
        currentJanuary, currentFebruary, currentMarch,
@@ -31,7 +31,7 @@ export(adjustableTierChart, asClassyList, asJul, asTi, assignList,
        latestSeptember, latestOctober, latestNovember, latestDecember,
        latestWeek, latestMonth, latestQuarter, latestHalf, latestQ4, latestYear,
        latestMonthDay, lintegrate, mergeSeries, minutely,
-       month, naWindow, nberDates, nberShade, nber.xy, nextBusinessDay,
+       month, naWindow, nberDates, nberShade, nextBusinessDay,
        observed, "observed<-",
        period, plotWindow, POSIXct, POSIXlt, 
        previousBusinessDay, 
@@ -42,7 +42,7 @@ export(adjustableTierChart, asClassyList, asJul, asTi, assignList,
        "start<-", stripBlanks, stripClass, stripTis,
        ti, tiBusiness, tiDaily, tierChart, tif, tifList,
        tif2freq, tifName, tis, tisFilter, tisFromCsv, tisLegend, tisPlot, today, t.tis,
-       tunnelSeries, updateColumns, updateList, year, ymd)
+       tunnelSeries, updateColumns, updateList, year, ymd, ymdXy, ymdShade)
 
 S3method("[", jul)
 S3method("[", ssDate)
@@ -61,6 +61,8 @@ S3method(as.list, ti)
 S3method(as.matrix, tis)
 S3method(as.POSIXct, jul)
 S3method(as.POSIXct, ti)
+S3method(as.POSIXlt, jul)
+S3method(as.POSIXlt, ti)
 S3method(as.tis, default)
 S3method(as.tis, tis)
 S3method(as.tis, ts)

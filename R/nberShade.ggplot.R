@@ -1,4 +1,4 @@
-nberShade.ggplot <- function(gg = ggplot2:::last_plot(),
+nberShade.ggplot <- function(gg = ggplot2::last_plot(),
                              fill = "grey80",
                              color = NA,
                              size = 0.5, 
@@ -33,14 +33,14 @@ nberShade.ggplot <- function(gg = ggplot2:::last_plot(),
     }
   }
   
-  gg <- gg + ggplot2:::geom_rect( ggplot2:::aes(xmin = Start, xmax = End, x = NULL, y = NULL, 
+  gg <- gg + ggplot2::geom_rect( ggplot2::aes(xmin = Start, xmax = End, x = NULL, y = NULL, 
                                                 ymin = ymin, ymax = ymax), color = color, fill = fill, 
                                  size = 0.5, alpha = 0.5, data = nber.dates) + 
-                                   ggplot2:::scale_y_continuous(expand = c(0,0))
+                                   ggplot2::scale_y_continuous(expand = c(0,0))
   
   if( ! openShade ){
     ## color = fill is the behavior in nberShade.default
-    gg <- gg + ggplot2:::geom_vline(xintercept = as.numeric(tail(nber.dates, 1)$Start), 
+    gg <- gg + ggplot2::geom_vline(xintercept = as.numeric(tail(nber.dates, 1)$Start), 
                                     color = fill, size = 1.5)
   }
   

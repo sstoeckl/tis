@@ -27,7 +27,8 @@ federalHolidays(years, board = F, businessOnly = T)
 goodFriday(years)
 easter(years)
 inaugurationDay(years)
-holidaysBetween(startTi, endTi, goodFriday = F, board = F, inaug = board, businessOnly = T)
+holidaysBetween(startTi, endTi, goodFriday = F, board = F, inaug = board,
+                businessOnly = T)
 }
 \arguments{
   \item{x}{a \code{ti} time index, or something that can be turned into

@@ -624,6 +624,9 @@ POSIXlt.ti      <- function(x, ...) as.POSIXlt(POSIXct(x, ...))
 POSIXlt.POSIXt  <- function(x, ...) as.POSIXlt(x, ...)
 POSIXlt.default <- function(x, ...) POSIXlt(jul(x), ...)
 
+as.POSIXlt.jul  <- function(x, ...) POSIXlt(x, ...)
+as.POSIXlt.ti   <- function(x, ...) POSIXlt(x, ...)
+
 baseYmd <- function(tif){
   nTif <- tif(tif)
   if(between(nTif, 1001, 1050)){
@@ -1082,7 +1085,7 @@ freq2tif <- function(freq){
   tif <- switch((freq >= 1) + (freq >= 2) + (freq >= 4) + 
                 (freq >= 6) + (freq >= 12) + (freq >= 24) + 
                 (freq >= 26) + (freq >= 36) + (freq >= 52) + 
-                (freq >= 262) + (freq >= 365), 
+                (freq >= 261) + (freq >= 365), 
                 44, 50, 32, 29, 27, 26, 22, 10, 4, 2, 1)
   if(is.null(tif)) stop("can't convert freq to tif")
   else             return(1e3 + tif)
@@ -1210,7 +1213,7 @@ tifList <- function(){
 }
 
 setDefaultFrequencies <- function(weekly     = "wmonday",
-                                  biweekly   = "bw2wednesday",
+                                  biweekly   = "bw1wednesday",
                                   bimonthly  = "bimonthdecember",
                                   quarterly  = "qdecember",
                                   annual     = "anndecember",

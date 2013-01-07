@@ -1,3 +1,32 @@
+Changes in Version 1.27
+
+  o Fixed bug in tisFromCsv() reported by Ying Leung. Also added chopNAs parameter to that
+    function.
+
+  o Changed name of ymd.xy() to ymdXy() to keep the CRAN checker happy.
+
+Changes in Version 1.26
+
+  o now exports the barplot2() function called by barplot.tis
+
+Changes in Version 1.25
+
+  o new capitalize() function moved here from the another package.
+
+  o new functions ymd.xy() and ymdShade() generalize the old nber.xy() (now defunct) and
+    nberShade() functions to shade arbitrary date ranges on tisPlots, not just NBER
+    recessions.
+
+  o changed names of "nber" arguments to tisPlot() to reflect the more general date range
+    shading functionality.
+
+Changes in Version 1.24
+
+  o freq2tif() gave wrong answer for frequency = 261, business day freq.
+
+  o tierChart(vlines.month) now draws vertical line after the last day of the month, rather
+    than after the first day of the month.
+
 Changes in Version 1.23
 
   o added some support for IDate objects from the data.table package.

@@ -238,13 +238,13 @@ tierChart <- function(x,
   ## Step 4: Grid lines and axes
   ##   locations of period ends, and days 1 and 15 of a month
   periodEnd.ticks  <- x.ticks[x.periodEnds]
-  day1  <- (1:xtlen)[x.ymd %% 100 == 1]
   day15 <- (1:xtlen)[x.ymd %% 100 == 15]
+  eom   <- (1:xtlen)[x.ymd == ymd(ti(x.ymd, tif = "monthly"))]
   ##   vertical periodEnd dashed lines
   if(vlines.periodEnd)
     axis(1, at = periodEnd.ticks, tck = 1, lty = 2, labels = FALSE)
-  ##   vertical first day of month grid lines
-  if(vlines.month) abline(v = day1, lty = 1)
+  ##   vertical last day of month grid lines
+  if(vlines.month) abline(v = eom, lty = 1)
   ##   left axis
   if(extendHorizontalTicks)
     axis(2, at = y.ticks, tck = 1, lty = 2, labels = FALSE) 

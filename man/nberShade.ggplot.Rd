@@ -11,7 +11,7 @@
   its \code{xrange} is of an appropiate size.
 }
 \usage{
-\method{nberShade}{ggplot}(gg = ggplot2:::last_plot(), fill = "grey80", color = NA, size = 0.5, 
+\method{nberShade}{ggplot}(gg = ggplot2::last_plot(), fill = "grey80", color = NA, size = 0.5, 
                         alpha = 0.5, xrange = NULL, openShade = TRUE, ...) 
 }
 \arguments{

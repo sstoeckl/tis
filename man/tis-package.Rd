@@ -100,7 +100,7 @@ actual frequencies the strings "weekly", "biweekly", "bimonthly",
 "quarterly", "semiannual" and "annual" refer to.  Note (as shown by
 \code{args(setDefaultFrequencies)}) that if you don't specify some other frequencies
 to \code{setDefaultFrequencies}, you'll get default weeks ending on Monday and
-default biweeks ending on the second Wednesday.  I chose these because they
+default biweeks ending on the first Wednesday.  I chose these because they
 are the weeks and biweeks used most often (for money and reserves data) in my
 section at the Federal Reserve Board.  You might want to use something like
 

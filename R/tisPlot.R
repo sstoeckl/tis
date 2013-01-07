@@ -75,11 +75,12 @@ tisPlot <- function(## series args
                     rightMargin = -1,
                     topMargin = -1,
                     bottomMargin = -1,
-                    ## nber shading
+                    ## shade date ranges polygons
                     nberShade = FALSE,
-                    nberColor = "gray",
-                    nberBorder = FALSE,
-                    nberArgs = list()){
+                    shadeDates = NULL, 
+                    shadeColor = "gray",
+                    shadeBorder = FALSE,
+                    polyArgs = list()){
   ## Reset some graphical parameters
   parOnEntry <- par(xaxs = "i", yaxs = "i", mex = 1)
   
@@ -358,21 +359,21 @@ tisPlot <- function(## series args
       else if(dfreq <= 12 || d > 123*86400) tif <- "monthly"
       
       if(d < 8*86400){
-        if(     d <    10) tif <- secondly(1)
-        else if(d <    30) tif <- secondly(5)
-        else if(d <    60) tif <- secondly(10)
-        else if(d <   120) tif <- secondly(15)
-        else if(d <   240) tif <- secondly(30)
-        else if(d <   480) tif <- minutely(1)
-        else if(d <  1800) tif <- minutely(5)
-        else if(d <  3600) tif <- minutely(10)
-        else if(d <  7200) tif <- minutely(15)
-        else if(d < 14400) tif <- minutely(30)
-        else if(d < 21600) tif <- hourly(1)
-        else if(d < 43200) tif <- hourly(2)
-        else if(d < 86400) tif <- hourly(4)
+        if(     d <    10)   tif <- secondly(1)
+        else if(d <    30)   tif <- secondly(5)
+        else if(d <    60)   tif <- secondly(10)
+        else if(d <   120)   tif <- secondly(15)
+        else if(d <   240)   tif <- secondly(30)
+        else if(d <   480)   tif <- minutely(1)
+        else if(d <  1800)   tif <- minutely(5)
+        else if(d <  3600)   tif <- minutely(10)
+        else if(d <  7200)   tif <- minutely(15)
+        else if(d < 14400)   tif <- minutely(30)
+        else if(d < 21600)   tif <- hourly(1)
+        else if(d < 43200)   tif <- hourly(2)
+        else if(d < 86400)   tif <- hourly(4)
         else if(d < 3*86400) tif <- hourly(12)
-        else tif <- "daily"
+        else                 tif <- "daily"
       }
     }
     tiRange <- c(ti(xRange[1] - 1, tif), ti(xRange[2] + 1, tif))
@@ -431,14 +432,16 @@ tisPlot <- function(## series args
       mtext(foot[i], side = 1, adj = footAlign, cex = footCex,
             line = xSpace * labCex - 1 + i * footCex, col = footColor[i])
   }
-  ## nber shading
-  if(nberShade){
-    nberArglist <- list(col = nberColor,
-                        border = nberBorder,
-                        xrange = time(xDataRange))
-    if(length(nberArgs) > 0)
-      nberArglist <- updateList(nberArglist, nberArgs)
-    do.call("nberShade", nberArglist)
+  ## shaded date ranges
+  if(nberShade && is.null(shadeDates)) shadeDates <- nberDates()
+  if(!is.null(shadeDates)){
+    ymdShadeArgs <- list(ymds = ymd(shadeDates),
+                         col = shadeColor,
+                         border = shadeBorder,
+                         xrange = time(xDataRange))
+    if(length(polyArgs) > 0)
+      ymdShadeArgs <- updateList(ymdShadeArgs, polyArgs)
+    do.call("ymdShade", ymdShadeArgs)
   }
 
   ## draw the X axis

@@ -13,12 +13,10 @@
   \item{height}{ a \code{tis} object. There may, however, be more than
   just one \code{tis} argument in the call.  
   }
-  \item{\dots}{ arguments passed on to \code{barplot.default}.
-  }
+  \item{\dots}{ arguments passed on to \code{barplot.default}.}
 }
 \details{
-  This function works by constructing a call to a slightly modified
-  version of \code{barplot.default} called \code{barplot2}.
+  \code{barplot.tis} constructs a call to \code{\link{barplot2}}.
   The \code{tis} arguments, including but not limited to \code{height},
   are pulled out and used to construct a \code{height} argument for the
   constructed call, and the \code{width} argument will be calculated as
@@ -50,11 +48,7 @@
   to be inversely proportional to the series frequencies, and the
   individual observations will align correctly on the time axis. 
   
-  The \code{barplot2} function called by this function is a non-exported
-  and undocumented (except here) extension of the standard
-  \code{barplot.default} function. It can take an additional
-  \code{x.offset} argumen to shift the plot left or right along the
-  x-axis.  \code{barplot.tis} finds the earliest starting date of the
+  \code{barplot.tis} finds the earliest starting date of the
   \code{tis} arguments and shifts the plot rightward along the x-axis by
   that amount, which aligns the first bar with its start date. That is,
   if \code{gdp} is the \code{tis} argument with the earliest start date of all
@@ -74,5 +68,5 @@
 \value{
   same as \code{barplot.default}.
 }
-\seealso{ \code{\link{barplot}}}
+\seealso{ \code{\link{barplot}}, \code{\link{barplot2}}}
 \keyword{ ts }

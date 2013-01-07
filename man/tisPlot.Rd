@@ -39,7 +39,8 @@ tisPlot(...,
         start = 0, end = 0,
         boxType = "u",
         leftMargin = -1, rightMargin = -1, topMargin = -1, bottomMargin = -1,
-        nberShade = FALSE, nberColor = "gray", nberBorder = FALSE, nberArgs = list())
+        nberShade = FALSE, shadeDates = NULL, shadeColor = "gray",
+        shadeBorder = FALSE, polyArgs = list())
 }
 \arguments{
   \item{\dots}{
@@ -388,20 +389,28 @@ tisPlot(...,
 	out automatically.
   }
   \item{nberShade}{
-	if \code{TRUE}, call the \code{nberShade} function to shade
-	recession periods on the plot. The default is \code{FALSE}.
+	if \code{TRUE}, use \code{nberDates()} to set the \code{shadeDates}.
+	This will result in shading of NBER recession periods. The default is \code{FALSE}.
   }
-  \item{nberColor}{
-	color to shade recessionary periods if \code{nberShade} is
-	\code{TRUE}. Passed along to the \code{nberShade} function.
+  \item{shadeDates}{
+    a matrix of yyyymmdd dates with two columns named 'Start'
+    and 'End' that specifies the date ranges to be shaded.
+    \code{nberDates()} produces a suitable matrix. If this argument is
+    \code{NULL} and \code{nberShade} is not \code{TRUE}, no shading is done.}
+  \item{shadeColor}{
+	color to shade periods specified by \code{shadeDates}. Passed along
+	to the \code{ymdShade} function. 
   }
-  \item{nberBorder}{
-	if \code{TRUE} and \code{nberShade} is also \code{TRUE}, draws
-	borders on the NBER shaded areas.  Default is \code{FALSE}.
+  \item{shadeBorder}{
+	if shading is being done, this argument tells what color the border
+	of the shaded areas should be drawn in.  It can also be a logical,
+	in which case \code{TRUE} draws borders in the foreground color and
+	\code{FALSE} does not draw borders on the shaded areas. Default is \code{FALSE}.
   }
-  \item{nberArgs}{
-	additional args to be passed along to the \code{nberShade} function
-	if \code{nberShade} is \code{TRUE}.
+  \item{polyArgs}{
+	additional args that are passed along to the \code{ymdShade}
+	function and eventually to \code{polygon} if shading of date ranges
+	is being done.
   }
 }
 \details{

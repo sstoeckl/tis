@@ -7,7 +7,8 @@
 tisFromCsv(csvFile, dateCol = "date", dateFormat = "\%Y\%m\%d",
            tif = NULL, defaultTif = "business",
            save = F, envir = parent.frame(),
-           naNumber = NULL, tolerance = sqrt(.Machine$double.eps), ...)
+           naNumber = NULL, chopNAs = TRUE,
+           tolerance = sqrt(.Machine$double.eps), ...)
 }
 \arguments{
   \item{csvFile}{A file name, connection, or URL acceptable to
@@ -32,6 +33,8 @@ tisFromCsv(csvFile, dateCol = "date", dateFormat = "\%Y\%m\%d",
     this number are considered to be \code{NA} values.  NA strings can
     be specified by including an \code{na.strings} argument as one of
     the \dots arguments that are passed along to \code{read.csv}.}
+  \item{chopNAs}{if \code{TRUE} (the default), leading and trailing
+    \code{NA} values are cut off of each column.}
   \item{tolerance}{Used to determine whether or not numbers in the file
     are close enough to \code{naNumber} to be regarded as equal to it.
     The default is about 1.48e-08.}
@@ -62,11 +65,12 @@ tisFromCsv(csvFile, dateCol = "date", dateFormat = "\%Y\%m\%d",
   with a \code{tif} (Time Index Frequency) inferred from the first six
   dates in the ymd column.  The first date is converted to a \code{ti}
   (Time Index) of that frequency and becomes the \code{start} of the
-  series.  Each individual column is then windowed via \code{naWindow}
-  to strip off leading and trailing \code{NA} values, and the resulting
-  series are put into a list with names given by lower-casing the column
-  names from the csv file.  If \code{save} is \code{TRUE}, the series
-  are also stored in \code{envir} using those same names.
+  series.  If \code{chopNAs} is \code{TRUE}, each individual column is
+  then windowed via \code{naWindow} to strip off leading and trailing
+  \code{NA} values, and the resulting series are put into a list with
+  names given by lower-casing the column names from the csv file.  If
+  \code{save} is \code{TRUE}, the series are also stored in \code{envir}
+  using those same names. 
 }
 \value{A list of \code{tis} time series, one per column of the csv file.
   The list is returned invisibly if \code{save} is \code{TRUE}.

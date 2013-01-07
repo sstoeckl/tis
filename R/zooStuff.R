@@ -1,6 +1,6 @@
-jul.yearmon <- function(x, offset = 0, ...) jul(zoo:::as.Date.yearmon(x, frac = offset))
+jul.yearmon <- function(x, offset = 0, ...) jul(zoo::as.Date.yearmon(x, frac = offset))
 ti.yearmon  <- function(x, ...) ti(jul(x), tif = "monthly")
-jul.yearqtr <- function(x, offset = 0, ...) jul(zoo:::as.Date.yearqtr(x, frac = offset))
+jul.yearqtr <- function(x, offset = 0, ...) jul(zoo::as.Date.yearqtr(x, frac = offset))
 ti.yearqtr  <- function(x, ...) ti(jul(x), tif = "quarterly")
 
 as.tis.zoo <- function(x, ...){

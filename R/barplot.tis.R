@@ -36,8 +36,7 @@ barplot.tis <- function(height, ...){
   }
   nonSeriesArgs$space <- space
 
-  x.offset <- min(time(asTi(sapply(series, start)) - 1))
-  max.x <- max(time(asTi(sapply(series, end))))
+  x.offset <- min(time(asTi(sapply(series, start)) - 1)) + zWidth[1]
   add <- is.logical(nonSeriesArgs$add) && nonSeriesArgs$add
   if(add){
     zArgs <- updateList(list(height = zHeight,
@@ -53,6 +52,9 @@ barplot.tis <- function(height, ...){
                         nonSeriesArgs)
   }
   boink <- do.call(barplot2, zArgs)
-  if(!add) Axis(x = c(x.offset, max.x), side = 1)
+  if(!add){
+    max.x <- max(time(asTi(sapply(series, end))))
+    Axis(x = c(x.offset, max.x), side = 1)
+  }
   return(boink)
 }

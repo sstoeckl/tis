@@ -8,7 +8,8 @@
   defaults for other arguments. 
 }
 \usage{
-tisLegend(..., xrel = 0.1, yrel = 0.1, xjust = 0, yjust = 1, boxType = "n", ncol = 1, cex = 1)
+tisLegend(..., xrel = 0.1, yrel = 0.1, xjust = 0, yjust = 1, boxType ="n",
+          ncol = 1, cex = 1)
 }
 \arguments{
   \item{\dots}{optional arguments to be passed on to \code{\link{legend}}.
