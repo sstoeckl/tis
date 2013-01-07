@@ -27,28 +27,28 @@ observed(x) <- value
   5-day business week or a 7-day calendar week.
 
   The \code{observed} attribute of series is one of the following:
-  \tabular{rl}{
-	\code{annualized} \tab Specifies that each time series value is the
+  \describe{
+	\item{\code{annualized}}{Specifies that each time series value is the
 	annualized sum of observations made throughout the associated time
 	interval. For time scale conversion and totaling purposes, this
-	attribute is the same as averaged. \cr
-	\code{averaged} \tab Specifies that each time series value is the
+	attribute is the same as averaged.}
+	\item{\code{averaged}}{Specifies that each time series value is the
 	average of the observations made throughout the associated time
-	interval. \cr
-    \code{beginning} \tab Specifies that each time series value
+	interval.}
+    \item{\code{beginning}}{Specifies that each time series value
     represents a single observation made at the beginning of the
-    associated time interval. \cr
-    \code{end} \tab Specifies that each time series value represents a
-    single observation made at the end of the associated time interval. \cr
-	\code{formula} \tab Specifies that the time series represents a
+    associated time interval.}
+    \item{\code{end}}{Specifies that each time series value represents a
+    single observation made at the end of the associated time interval.}
+	\item{\code{formula}}{Specifies that the time series represents a
 	transformation of other series. For time scale conversion and
-	totaling purposes, this attribute is the same as averaged. \cr
-	\code{high} \tab Specifies that each time series value is the
-	maximum value for the time interval. \cr
-	\code{low} \tab Specifies that each time series value is the minimum
-	value for the time interval. \cr
-	\code{summed} \tab Specifies that each time series value is the sum
-	of observations made throughout the associated time interval. \cr
+	totaling purposes, this attribute is the same as averaged.}
+	\item{\code{high}}{Specifies that each time series value is the
+	maximum value for the time interval.}
+	\item{\code{low}}{Specifies that each time series value is the minimum
+	value for the time interval.}
+	\item{\code{summed}}{Specifies that each time series value is the sum
+	of observations made throughout the associated time interval.}
   }
 }
 \value{\code{basis} and \code{observed} return a character string.  The

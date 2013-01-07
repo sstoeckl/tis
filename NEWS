@@ -1,3 +1,16 @@
+Changes in Version 1.23
+
+  o added some support for IDate objects from the data.table package.
+
+  o added isBusinessDay() function at the suggestion of Adam Hogan.
+
+  o fixed a bug in inferDate() that was causing tisFromCsv() to misbehave
+
+Changes in Version 1.22
+
+  o defined some variables locally in nberShade.ggplot() to avoid spurious R
+    CMD check warnings.
+
 Changes in Version 1.21
 
   o changed name of as.list.keepClass() to asClassyList() to placate CRAN

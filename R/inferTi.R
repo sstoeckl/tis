@@ -23,7 +23,12 @@ inferTi <- function(dateTimes){
     }
     else tif <- freq2tif(freq)
   }
-  dtTi <- ti(dt - diffSeconds/2, tif = tif)
+
+  lt <- as.POSIXlt(dt)
+  if(sum(lt$sec + lt$min + lt$hour) == 0)
+    dtTi <- ti(dt, tif = tif)
+  else
+    dtTi <- ti(dt - diffSeconds/2, tif = tif)
 
   if(freq < 365){
     if(median(abs(jul(dtTi) - dtJul)) > 0.5){ ## could be wrong tif

@@ -141,7 +141,7 @@ scatterPlot <- function(x, y,
 
   ## Set tick labels
   if(labelLeftTicks || labelRightTicks){
-    if(is.null(yTickLabels))
+    if(is.null(yTickLabels) && !is.null(yAt))
       yTickLabels <- format(signif(yAt, 5))
   }
   else yTickLabels <- FALSE
@@ -157,7 +157,7 @@ scatterPlot <- function(x, y,
     }
   }
   if(labelXTicks){
-    if(is.null(xTickLabels))
+    if(is.null(xTickLabels) && !is.null(xAt))
       xTickLabels <- format(signif(xAt, 5))
   }
   else xTickLabels <- FALSE
@@ -273,8 +273,8 @@ scatterPlot <- function(x, y,
   ## last is always 0, but we need to compute a reasonable number for the
   ## second.
   xmgp <- ymgp <- par("mgp")
-  xmgp[2] <- 0.6*xCex - 0.5
-  ymgp[2] <- 0.6*yCex - 0.2
+  xmgp[2] <- max(0.6*xCex - 0.5, 0)
+  ymgp[2] <- max(0.6*yCex - 0.2, 0)
   
   axis(side = 1, at = xAt, labels = if(labelXTicks) xTickLabels else FALSE,
        lwd = axisWidth, cex.axis = xCex, tick = TRUE, tck = tck,

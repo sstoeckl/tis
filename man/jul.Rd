@@ -1,6 +1,7 @@
 \name{jul}
 \alias{jul}
 \alias{jul.Date}
+\alias{jul.IDate}
 \alias{jul.default}
 \alias{jul.ti}
 \alias{jul.yearmon}
@@ -12,6 +13,7 @@
 \usage{
 jul(x, \dots)
 \method{jul}{Date}(x, \dots)
+\method{jul}{IDate}(x, \dots)
 \method{jul}{ti}(x, offset = 1, \dots)
 \method{jul}{yearmon}(x, offset = 0, \dots)
 \method{jul}{yearqtr}(x, offset = 0, \dots)
@@ -81,7 +83,9 @@ is.jul(x)
   \code{time}, \code{ymd}.
   
   \code{jul} is a generic function with specialized methods to handle
-  \code{Date} and \code{ti} objects.
+  \code{Date} and \code{ti} objects. A recent addition is a method to
+  handle \code{IDate} objects as defined in the \pkg{data.table}
+  package. 
   
   The default method (\code{jul.default}) deals with character \code{x} by
   calling \code{as.Date} on it.  Otherwise, it proceeds as follows:

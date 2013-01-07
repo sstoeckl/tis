@@ -29,6 +29,11 @@ isHoliday <- function(x, goodFriday = F, board = F, inaug = board, businessOnly 
   match(ymd(x), hols, nomatch = 0) > 0
 }
 
+isBusinessDay<- function(x, ...){
+  dow <- dayOfWeek(x)
+  return( dow > 1 & dow < 7 & !isHoliday(x, ...))
+}
+
 isGoodFriday <- function(x){
   hols <- goodFriday(year(x))
   match(ymd(x), hols, nomatch = 0) > 0

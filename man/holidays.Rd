@@ -2,6 +2,7 @@
 \alias{nextBusinessDay}
 \alias{previousBusinessDay}
 \alias{isHoliday}
+\alias{isBusinessDay}
 \alias{isGoodFriday}
 \alias{isEaster}
 \alias{holidays}
@@ -18,6 +19,7 @@
 nextBusinessDay(x, holidays = NULL, goodFriday = F, board = F, inaug = board)
 previousBusinessDay(x, holidays = NULL, goodFriday = F, board = F, inaug = board)
 isHoliday(x, goodFriday = F, board = F, inaug = board, businessOnly = T)
+isBusinessDay(x, ...)
 isGoodFriday(x)
 isEaster(x)
 holidays(years, goodFriday = F, board = F, inaug = board, businessOnly = T)
@@ -42,6 +44,7 @@ holidaysBetween(startTi, endTi, goodFriday = F, board = F, inaug = board, busine
   \item{businessOnly}{if \code{TRUE} (the default), ignore Saturday NewYears,
 	Independence, Veterans amd Christmas Day holidays.  Has no effect if
 	\code{board} is \code{TRUE}, since that moves Saturday holidays to Friday.}
+  \item{\dots}{arguments passed on to \code{isHoliday}}
   \item{years}{numeric vector of 4 digit years}
   \item{startTi}{a daily \code{ti} time index, or something that can be
   turned into one}
@@ -65,13 +68,16 @@ holidaysBetween(startTi, endTi, goodFriday = F, board = F, inaug = board, busine
   the holidays returned by \code{federalHolidays}, but it can be
   included in several of the other functions by setting the \code{inaug}
   argument to \code{TRUE}.
+
+  The function \code{isBusinessDay} returns \code{TRUE} for \code{x} if
+  and only if \code{x} is not a holiday, a Saturday or a Sunday.
 }
 \value{
   \code{nextBusinessDay} and \code{previousBusinessDay} return
   "business" frequency \code{ti} objects.
 
-  \code{isHoliday}, \code{isGoodFriday} and \code{isEaster} return
-  Boolean vectors as long as \code{x}.
+  \code{isHoliday}, \code{isGoodFriday}, \code{isEaster} and \code{isBusinessDay} return
+  Boolean vectors as long as \code{x}. 
 
   \code{easter} and \code{goodFriday} return numeric vectors of yyyymmdd
   dates of the appropiate holidays for each year in the \code{years}

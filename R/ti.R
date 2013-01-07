@@ -1,3 +1,6 @@
+## An not-exported environment used to hold list of frequencies
+.tiEnv <- new.env()
+
 ## Date representations:
 ## A ymd is always an integer: year*10000 + month *100 + day
 ## For jul, c(julianDay, hour, minute, second) is encoded as
@@ -171,6 +174,9 @@ jul.ti <- function(x, offset = 1, ...){
 jul.Date <- function(x, ...)
   asJul(unclass(as.vector(x + 2440588)))
 
+jul.IDate <- function(x, ...)
+  asJul(unclass(as.vector(x + 2440588)))
+
 jul.default <- function(x, ...){
   if(missing(x))       return(jul.Date(Sys.Date()))
   if(is.character(x))  return(jul.Date(as.Date(x, ...)))
@@ -335,7 +341,11 @@ is.ti <- function(x) inherits(x, "ti")
 ti <- function(x, ...) UseMethod("ti")
 ti.jul <- function(x, tif = NULL, freq = NULL,
                    hour = 0, minute = 0, second = 0, ...){
-  if(is.null(tif)) tif <- freq2tif(freq)
+  if(is.null(tif)){
+    if(is.null(freq))
+      stop("'tif' and 'freq' cannot both be NULL if 'x' is not a ti")
+    else tif <- freq2tif(freq)
+  }
   intraday <- isIntradayTif(tif)
   if(any(intraday)){
     if(!(missing(hour) && missing(minute) && missing(second)))
@@ -372,7 +382,11 @@ ti.ti <- function(x, tif = NULL, freq = NULL, ...){
 ti.Date <- function(x, ...) ti(jul(x), ...)
 
 ti.default <- function(x, tif = NULL, freq = NULL, ...){
-  if(is.null(tif))            tif <- freq2tif(freq)
+  if(is.null(tif)){
+    if(is.null(freq))
+      stop("'tif' and 'freq' cannot both be NULL if 'x' is not a ti")
+    else tif <- freq2tif(freq)
+  }
   if(missing(x))              return(ti(jul(Sys.Date()), tif, ...))
   if(is.null(x))              stop("NULL argument to ti function")
   if(is.character(x))         return(ti(as.Date(x, ...), tif = tif))
@@ -1185,10 +1199,10 @@ initialTifList <- function(){
 }
 
 tifList <- function(){
-  if(!exists(".tifList", envir = globalenv()))
+  if(!exists(".tifList", envir = .tiEnv))
     tl <- setDefaultFrequencies(setup = TRUE)
   else{
-    tl <- get(".tifList", envir = globalenv())
+    tl <- get(".tifList", envir = .tiEnv)
     if(is.na(tl["weekly"]))
       tl <- setDefaultFrequencies(setup = FALSE)
   }
@@ -1204,9 +1218,9 @@ setDefaultFrequencies <- function(weekly     = "wmonday",
                                   setup = FALSE){
   if(setup) tl <- initialTifList()
   else {
-    if(!exists(".tifList", envir = globalenv()))
-      assign(".tifList", initialTifList(), envir = globalenv())
-    tl <- get(".tifList", envir = globalenv())
+    if(!exists(".tifList", envir = .tiEnv))
+      assign(".tifList", initialTifList(), envir = .tiEnv)
+    tl <- get(".tifList", envir = .tiEnv)
   }
   if(!missing(weekly) || setup)
     tl["weekly"] <- tl[weekly]
@@ -1220,6 +1234,6 @@ setDefaultFrequencies <- function(weekly     = "wmonday",
     tl[c("annual", "a")] <- tl[annual]
   if(!missing(semiannual) || setup)
     tl[c("sann", "semiannual")]  <- tl[semiannual]
-  assign(".tifList", tl, envir = globalenv())
+  assign(".tifList", tl, envir = .tiEnv)
 }
 

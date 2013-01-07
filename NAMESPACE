@@ -20,7 +20,7 @@ export(adjustableTierChart, asClassyList, asJul, asTi, assignList,
        firstBusinessDayOf, firstBusinessDayOfMonth, firstDayOf, fortify.tis,
        frColors, goodFriday, growth.rate, "growth.rate<-", hms,
        holidays, holidaysBetween,  hourly, ilspline, inaugurationDay, inferTi,
-       interpNA, isEaster, isGoodFriday, isHoliday,
+       interpNA, isBusinessDay, isEaster, isGoodFriday, isHoliday,
        isIntradayTif, is.jul,
        isLeapYear, is.ssDate, is.ti, is.tis, jul,
        lastDayOf, lags, Lag, Lags, lastBusinessDayOf, lastBusinessDayOfMonth,
@@ -93,6 +93,7 @@ S3method(format, ti)
 S3method(frequency, ti)
 S3method(frequency, tis)
 S3method(jul, Date)
+S3method(jul, IDate)
 S3method(jul, default)
 S3method(jul, jul)
 S3method(jul, POSIXct)

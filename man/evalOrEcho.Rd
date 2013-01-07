@@ -26,14 +26,14 @@ evalOrEcho(x, resultMode = NULL, n = 0)
 }
 \details{
   Using this function inside another function to process some of its
-  arguments can be very useful.  For example, \code{seriesPlot} has a
+  arguments can be very useful.  For example, \code{tisPlot} has a
   number or arguments that specify text labels for headers, subheaders,
   footnotes, axis labels, and so on.  One of those arguments is
   \code{sub}, which specifies the subheader.  By doing this:
 
   \code{sub <- evalOrEcho(sub, resultMode = "character")}
 
-  \code{seriesPlot} can handle the \code{sub} argument given in any of
+  \code{tisPlot} can handle the \code{sub} argument given in any of
   these forms:
   \enumerate{
 	\item \code{sub = "This is a simple subtitle"}.
