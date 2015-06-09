@@ -26,7 +26,7 @@ barplot.tis <- function(height, ...){
     ## iterate a few times to set space and zWidth such that the width of a
     ## bar plus it's space equals the difference in times so that the
     ## bars are spaced correctly on the time axis.
-    space <- rep(space, len = length(zWidth))
+    space <- rep(space, length.out = length(zWidth))
     zw <- zWidth
     for(i in 1:10){
       avg <- mean(zw, na.rm = T)

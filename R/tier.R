@@ -189,7 +189,7 @@ tierChart <- function(x,
     pch <- paste(substring(years, 4, 4), collapse = "")
 
   if(!missing(lwdLastYear)){
-    lwd <- rep(lwd, length = length(years))
+    lwd <- rep(lwd, length.out = length(years))
     lwd[length(lwd)] <- lwdLastYear
   }
   

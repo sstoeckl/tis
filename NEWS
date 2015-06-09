@@ -1,3 +1,23 @@
+Changes in Version 1.30
+
+  o Added tis methods for head() and tail().
+
+Changes in Version 1.29
+
+  o Removed aggregate.ts() function, which was a modified version of the same-named function
+    in package:stats. Also modified aggregate.tis() to prefer a local version of
+    aggregate.ts to the one in package:stats.
+
+  o Registered S3 method t.tis()
+
+Changes in Version 1.28
+
+  o Added tz argument to tisFromCsv() and added logic to handle date strings that can't be
+    turned into valid dates. Thanks again to Ying Leung for reporting the problem that led
+    to the discovery of a bug.
+
+  o Added naLoses argument to mergeSeries(), with default value of FALSE for backward compatibility.
+
 Changes in Version 1.27
 
   o Fixed bug in tisFromCsv() reported by Ying Leung. Also added chopNAs parameter to that

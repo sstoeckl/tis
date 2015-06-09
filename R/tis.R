@@ -85,38 +85,10 @@ aggregate.tis <- function (x, FUN = sum, ...){
     argList$FUN <- FUN
   argList$fun <- NULL
   argList$x <- as.ts(x)
-  as.tis(do.call("aggregate", argList))
-}
-
-aggregate.ts <- function (x, nfrequency = 1, FUN = sum, ndeltat = 1,
-                          ts.eps = getOption("ts.eps"),  ...) {
-  ## fixed to start on nfreq boundary
-  x <- as.ts(x)
-  ofrequency <- tsp(x)[3]
-  if (missing(nfrequency)) 
-    nfrequency <- 1/ndeltat
-  if ((nfrequency > 1) && (abs(nfrequency - round(nfrequency)) < 
-                           ts.eps)) 
-    nfrequency <- round(nfrequency)
-  if (nfrequency == ofrequency) 
-    return(x)
-  if (abs(ofrequency%%nfrequency) > ts.eps) 
-    stop(paste("cannot change frequency from", ofrequency, 
-               "to", nfrequency))
-  len <- ofrequency%/%nfrequency
-  mat <- is.matrix(x)
-  if (mat) 
-    cn <- colnames(x)
-  nstart <- ceiling(tsp(x)[1]*nfrequency)/nfrequency
-  ## nstart <- tsp(x)[1]
-  x <- as.matrix(window(x, start = nstart))
-  nend <- floor(nrow(x)/len) * len
-  x <- apply(array(c(x[1:nend, ]), dim = c(len, nend/len, ncol(x))), 
-             MARGIN = c(2, 3), FUN = FUN, ...)
-  if (!mat) 
-    x <- as.vector(x)
-  else colnames(x) <- cn
-  ts(x, start = nstart, frequency = nfrequency)
+  ## substitute local version of aggregate.ts if there is one
+  if(exists("aggregate.ts", envir = globalenv()))
+    aggregate.ts <- get("aggregate.ts", envir = globalenv())
+  as.tis(do.call("aggregate.ts", argList))
 }
 
 cummax.tis <- function(x){
@@ -449,8 +421,10 @@ cbind.tis <- function(..., union = F){
   z
 }
 
-mergeSeries <- function(x, y, differences=F){
-  ## where x and y overlap, y values are used
+mergeSeries <- function(x, y, differences=FALSE, naLoses = FALSE){
+  ## where x and y overlap, y values are used, unless naLoses
+  ## is TRUE and there are NA values in y with corresponding
+  ## non-NA values in x.
   ## if diff == T, the first differences are merged, and then
   ## cumulatively summed.  If start(y) <= start(x), the first
   ## obs will be from y, else it is from x.  Column names of x
@@ -468,36 +442,55 @@ mergeSeries <- function(x, y, differences=F){
   yRows  <- NROW(y)
   
   zStart <- min(xStart, yStart)
-  zRows  <- max(xStart + xRows, yStart + yRows) - zStart 
-
+  zRows  <- max(xStart + xRows, yStart + yRows) - zStart
+  
   ix <- (1:xRows) + xStart - zStart
   iy <- (1:yRows) + yStart - zStart
-
+  
   if(xCols == 1){
     z <- numeric(zRows) + NA
     if(differences){
-      if(zStart == yStart) firstval <- y[1]
+      if(zStart == yStart){
+        firstval <- y[1]
+        if(naLoses && is.na(y[1]) && zStart == xStart)
+          firstval <- x[1]
+      }
       else firstval <- x[1]
       za <- c(firstval, unclass(mergeSeries(diff(x), diff(y))))
       z <- cumsum(za)
     }
     else{
       z[ix] <- x[]
-      z[iy] <- y[]
+      if(naLoses){
+        notNA <- !is.na(y)
+        z[iy[notNA]] <- y[notNA]
+      }
+      else z[iy] <- y[]
     }
   }
   else{
     z <- matrix(NA, zRows, xCols)
     if(differences){
-      if(zStart == yStart) firstval <- y[1,]
+      if(zStart == yStart){
+        firstval <- y[1,]
+        if(naLoses && zStart == xStart){
+          naSpots <- is.na(y[1,])
+          firstval[naSpots] <- x[1, naSpots]
+        }
+      }
       else firstval <- x[1,]
       za <- rbind(firstval, unclass(mergeSeries(diff(x), diff(y)))) 
-      for(i in 1:xCols) z[,i] <- cumsum(za[,i])
+      for(j in 1:xCols) z[,j] <- cumsum(za[,j])
     }
     else{
-      for(i in 1:xCols){
-        z[ix, i] <- x[,i]
-        z[iy, i] <- y[,i]
+      for(j in 1:xCols){
+        z[ix, j] <- x[,j]
+        if(naLoses){
+          notNA <- !is.na(y[,j])
+          z[iy[notNA], j] <- y[notNA, j]
+        }
+        else
+          z[iy, j] <- y[,j]
       }
     }
     xDn <- dimnames(x)
@@ -524,10 +517,11 @@ mergeSeries <- function(x, y, differences=F){
   if(is.logical(i))
     i <- seq(i)[i]
   if(is.numeric(i)){
-    if(is.ti(i)) i <- i + 1 - start(x)
-    else if(couldBeTi(i, tif = tif))
-      i <- asTi(i) + 1 - start(x)
-    i[i<=0] <- NA
+    if(couldBeTi(i, tif = tif)) i <- asTi(i)
+    if(is.ti(i)){
+      i <- i + 1 - start(x)
+      i[i<=0] <- NA ## Can only happen if i is before start(x), which can't be right
+    }
   }
   else stop("non-numeric row index")
   z <- stripTis(x)
@@ -597,12 +591,12 @@ mergeSeries <- function(x, y, differences=F){
         if(is.matrix(i))  x[i] <- value
         else {
           if(singleIndex){
-            if(is.logical(i)) x[i] <- rep(value, length = sum(i))
-            else              x[i] <- rep(value, length = length(i))
+            if(is.logical(i)) x[i] <- rep(value, length.out = sum(i))
+            else              x[i] <- rep(value, length.out = length(i))
           }
           else {
-            if(is.logical(i)) x[i,] <- rep(value, length = sum(i)*ncol(x))
-            else              x[i,] <- rep(value, length = length(i)*ncol(x))
+            if(is.logical(i)) x[i,] <- rep(value, length.out = sum(i)*ncol(x))
+            else              x[i,] <- rep(value, length.out = length(i)*ncol(x))
           }
         }
       }
@@ -616,13 +610,13 @@ mergeSeries <- function(x, y, differences=F){
 }
 
 head.tis <- function(x, n = 6, ...){
-  z <- head(x, n = n, ...)
-  start(z) <- start(x)
-  z
+  if(n == 0) stop("head() with n = 0 makes no sense")
+  if(n > 0) window(x, end = start(x) + n - 1)
+  else      window(x, end = end(x) + n)
 }
 
 tail.tis <- function(x, n = 6, ...){
-  z <- tail(x, n = n, ...)
-  start(z) <- end(x) - NROW(z)
-  z
+  if(n == 0) stop("tail() with n = 0 makes no sense")
+  if(n > 0) window(x, start = end(x) - n + 1)
+  else      window(x, start = start(x) - n)
 }

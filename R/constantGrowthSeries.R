@@ -22,7 +22,7 @@ tunnelSeries <- function(startValue,
   ## resulting bivariate series will have the same frequency as start.
   ## spreads should be a vector of length 2.
   if(!inherits(start, "ti")) stop("start must be a ti")
-  spreads <- rep(spreads, length = 2)
+  spreads <- rep(spreads, length.out = 2)
   offsets <- startValue*spreads/100
   midSeries <- fanSeries(startValue, start, end, rate)
   z <- cbind(midSeries + offsets[1], midSeries + offsets[2])

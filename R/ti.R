@@ -34,8 +34,8 @@ jul2ti <- function(jul, tif){
   tifLen <- length(tif)
   if(tifLen > 1 && length(uniq <- unique(tif)) > 1){
     n <- max(length(jul), tifLen)
-    juln <- rep(jul, length = n)
-    tifn <- rep(tif, length = n)
+    juln <- rep(jul, length.out = n)
+    tifn <- rep(tif, length.out = n)
     ans <- asTi(unclass(juln))
     for(u in uniq){
       index <- tifn == u
@@ -120,8 +120,8 @@ ymd2ti <- function(ymd, tif){
   tifLen <- length(tif)
   if(length(uniq <- unique(tif)) > 1){
     n <- max(length(ymd), tifLen)
-    ymdn <- rep(ymd, length = n)
-    tifn <- rep(tif, length = n)
+    ymdn <- rep(ymd, length.out = n)
+    tifn <- rep(tif, length.out = n)
     ans <- asTi(unclass(ymdn))
     for(u in uniq){
       index <- tifn == u
@@ -504,8 +504,8 @@ Ops.ti <- function (e1, e2){
   isTi2 <- is.ti(e2)
   if(isTi1 && isTi2){
     n <- max(length(e1), length(e2))
-    tif1 <- rep(tif(e1), length = n)
-    tif2 <- rep(tif(e2), length = n)
+    tif1 <- rep(tif(e1), length.out = n)
+    tif2 <- rep(tif(e2), length.out = n)
     if(any(tif1 != tif2) && .Generic != "==") stop("different tif\'s")
     validOp <- switch(.Generic, "-" =, "<" = , ">" =, "==" =,
                       "!=" =, "<=" =, ">=" = TRUE, FALSE)

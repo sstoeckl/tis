@@ -132,7 +132,7 @@ tisPlot <- function(## series args
   if(missing(lineType)) lineType <- 1:nSeries
 
   ## figure which series go on left and right axis
-  leftAxis <- rep(leftAxis, length = nSeries)
+  leftAxis <- rep(leftAxis, length.out = nSeries)
   rightAxis <- !leftAxis
 
   ## use window if start or end is sent as argument
@@ -147,8 +147,8 @@ tisPlot <- function(## series args
   starts   <- sapply(series, start)
   ends     <- sapply(series, end)
   tifNames <- sapply(series, tifName)
-  offsets  <- rep(ifelse(midPoints, 0.5, 1), length = nSeries)
-  xOffset  <- rep(xOffset, length = nSeries)
+  offsets  <- rep(ifelse(midPoints, 0.5, 1), length.out = nSeries)
+  xOffset  <- rep(xOffset, length.out = nSeries)
   xcts     <- vector("list", nSeries)
   for(i in 1:nSeries)
     xcts[[i]] <- POSIXct(ti(series[[i]]), offset = offsets[i]) + xOffset[i]
@@ -163,13 +163,13 @@ tisPlot <- function(## series args
   yCex     <- cex * yCex
   innerCex <- cex * innerCex
 
-  dataCex   <- rep(dataCex,   length = nSeries)
-  lineType  <- rep(lineType,  length = nSeries)
-  plotType  <- rep(plotType,  length = nSeries)
-  lineWidth <- rep(lineWidth, length = nSeries)
-  color     <- rep(color,     length = nSeries)
-  plotChar  <- rep(plotChar,  length = nSeries)
-  dropNA    <- rep(dropNA,    length = nSeries)
+  dataCex   <- rep(dataCex,   length.out = nSeries)
+  lineType  <- rep(lineType,  length.out = nSeries)
+  plotType  <- rep(plotType,  length.out = nSeries)
+  lineWidth <- rep(lineWidth, length.out = nSeries)
+  color     <- rep(color,     length.out = nSeries)
+  plotChar  <- rep(plotChar,  length.out = nSeries)
+  dropNA    <- rep(dropNA,    length.out = nSeries)
   
   ## Plotting is done in the following order:
   ##  the figure margins (axes, titles, footnotes)
@@ -427,7 +427,7 @@ tisPlot <- function(## series args
             line = subSpace - i * subCex, font = par("font.sub"))
   ##   foot
   if(nFoots > 0){
-    footColor <- rep(footColor, length = nFoots)
+    footColor <- rep(footColor, length.out = nFoots)
     for(i in 1:nFoots)
       mtext(foot[i], side = 1, adj = footAlign, cex = footCex,
             line = xSpace * labCex - 1 + i * footCex, col = footColor[i])
@@ -652,11 +652,11 @@ tisLegend <- function(..., xrel = 0.1, yrel = 0.1, xjust = 0, yjust = 1,
   }
   ## Make certain args the same length as legend
   n <- length(legendArgs$legend)
-  legendArgs$col <- rep(legendArgs$col, length = n)
-  legendArgs$lty <- rep(legendArgs$lty, length = n)
-  legendArgs$lwd <- rep(legendArgs$lwd, length = n)
-  legendArgs$pch <- rep(legendArgs$pch, length = n)
-  type <- rep(sp$plotType, length = n)
+  legendArgs$col <- rep(legendArgs$col, length.out = n)
+  legendArgs$lty <- rep(legendArgs$lty, length.out = n)
+  legendArgs$lwd <- rep(legendArgs$lwd, length.out = n)
+  legendArgs$pch <- rep(legendArgs$pch, length.out = n)
+  type <- rep(sp$plotType, length.out = n)
   hasPoints <- (type == "p" | type == "b" | type == "o")
   hasLines  <- (type == "l" | type == "b" | type == "c" |
                 type == "o" | type == "h")
@@ -674,7 +674,7 @@ tisLegend <- function(..., xrel = 0.1, yrel = 0.1, xjust = 0, yjust = 1,
   ## color the legend text
   if(is.null(legendArgs$text.col))
     legendArgs$text.col <- legendArgs$col
-  legendArgs$text.col <- rep(legendArgs$text.col, length = n)
+  legendArgs$text.col <- rep(legendArgs$text.col, length.out = n)
   
   do.call("legend", legendArgs)
   class(legendArgs) <- "tisLegend"

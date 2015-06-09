@@ -49,7 +49,7 @@ screenPage <- function(head = NULL,
   if(!is.null( sub))    sub  <- evalOrEcho(sub)
   if(!is.null(foot))    foot <- evalOrEcho(foot)
 
-  footAlign <- rep(footAlign, length = length(foot))
+  footAlign <- rep(footAlign, length.out = length(foot))
   
   ## All cex's are relative to cex
   topLeftCex   <- cex * topLeftCex

@@ -6,7 +6,7 @@
   of the second series where the series overlap.
 }
 \usage{
-mergeSeries(x, y, differences = F)
+mergeSeries(x, y, differences = FALSE, naLoses = FALSE)
 }
 \arguments{
   \item{x, y}{
@@ -14,8 +14,12 @@ mergeSeries(x, y, differences = F)
 	\code{tis} by \code{as.tis}.
   }
   \item{differences}{
-	if \code{T}, the first differences of series are merged, and then
-	cumulatively summed. The default is \code{F}.
+	if \code{TRUE}, the first differences of series are merged, and then
+	cumulatively summed. The default is \code{FALSE}.
+  }
+  \item{naLoses}{
+	if \code{TRUE}, \code{NA} values in \code{y} do not overwrite
+	corresponding values in \code{x}.
   }
 }
 \details{
@@ -25,7 +29,8 @@ mergeSeries(x, y, differences = F)
 \value{
   A \code{tis} object series with start and end dates that span those of
   \code{x} and \code{y}.  Where the series overlap, values from \code{y}
-  are used. 
+  are used, except that if \code{naLoses} is \code{TRUE}, \code{NA}
+  values from \code{y} do not overwrite non-\code{NA} values in \code{x}.
 }
 \seealso{ \code{\link{cbind.tis}} }
 \keyword{ ts }

@@ -1,6 +1,7 @@
 tisFromCsv <- function(csvFile,
                        dateCol = "date",
                        dateFormat = "%Y%m%d",
+                       tz = "", 
                        tif = NULL,
                        defaultTif = "business",
                        save = F,
@@ -47,7 +48,16 @@ tisFromCsv <- function(csvFile,
       dateFormat <- paste(dateFormat, "%d")
       zDateStrings <- paste(zDateStrings, "1")
     }
-    dateTimes <- as.POSIXct(strptime(zDateStrings, format = dateFormat))
+    dateTimes <- as.POSIXct(strptime(zDateStrings, format = dateFormat, tz = tz))
+  }
+  naTimes <- is.na(dateTimes)
+  if(any(naTimes)){
+    warning("Some rows ignored due to NA dateTimes resulting from ",
+            "attempts to convert the strings\n  ",
+            paste(zDateStrings[naTimes], collapse = ", "),
+            "\nto dates")
+    dateTimes <- dateTimes[!naTimes]
+    z <- z[!naTimes,,drop = FALSE]
   }
   if(!is.null(tif)) dtTi <- ti(dateTimes, tif = tif)
   else              dtTi <- inferTi(dateTimes)

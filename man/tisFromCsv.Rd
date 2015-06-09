@@ -4,7 +4,7 @@
 \description{Reads \code{tis} (Time Indexed Series) from a csv file,
   returning the series in a list, and optionally storing them in an environment.}
 \usage{
-tisFromCsv(csvFile, dateCol = "date", dateFormat = "\%Y\%m\%d",
+tisFromCsv(csvFile, dateCol = "date", dateFormat = "\%Y\%m\%d", tz = "",
            tif = NULL, defaultTif = "business",
            save = F, envir = parent.frame(),
            naNumber = NULL, chopNAs = TRUE,
@@ -19,6 +19,15 @@ tisFromCsv(csvFile, dateCol = "date", dateFormat = "\%Y\%m\%d",
   \item{dateFormat}{format of the dates in \code{dateCol}. If
   the \code{dateCol} cells contain Excel dates, use \code{dateFormat ==
   "excel"}.  If they are strings, see \code{\link{strptime}} for date formats.}
+  \item{tz}{the time zone to be used by \code{\link{strptime}} when
+    converting date strings into \code{POSIXlt} timestamps. The default
+    is to use the current time zone, which means it can change from,
+    say, EST to EDT in the spring, and back to EST in the fall. If you
+    have an "impossible" time in your csv file, like 2 am on March 13,
+    2011, this will result in an unexpected \code{NA} in the created
+    \code{ti} dates, which will result in those rows in your csv being
+    effectively ignored.
+  }
   \item{tif}{time index frequency of the data.  If this is \code{NULL}
 	(the default), the function tries to infer the frequency from the
 	dates in the \code{ymdCol} column.}
