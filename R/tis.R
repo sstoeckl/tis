@@ -516,7 +516,7 @@ mergeSeries <- function(x, y, differences=FALSE, naLoses = FALSE){
   tif <- tif(x)
   if(is.logical(i))
     i <- seq(i)[i]
-  if(is.numeric(i)){
+  if(is.numeric(i)|| is.ti(i)){
     if(couldBeTi(i, tif = tif)) i <- asTi(i)
     if(is.ti(i)){
       i <- i + 1 - start(x)
@@ -555,7 +555,7 @@ mergeSeries <- function(x, y, differences=FALSE, naLoses = FALSE){
       alli <- i
       i <- i[!naSpots]
     }
-    if(is.numeric(i)){
+    if(is.numeric(i) || is.ti(i)){
       if(!is.ti(i) && couldBeTi(i, tif = tif))
         i <- asTi(i)
       if(is.ti(i)){

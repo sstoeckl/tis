@@ -78,8 +78,9 @@ scatterPlot(x, y,
 	calculation described in \code{xExpandBy}.
   }
   \item{xExpandBy}{
-	calculate \code{xAxisMin} and \code{xAxisMax} by multiplicatively
-	extending the data range in both directions by this amount.  Default
+    a single number or two numbers between 0 and 1. \code{xAxisMin} and
+    \code{xAxisMax} will be calculated by multiplicatively
+	extending the data range in both directions by these amounts.  Default
 	value .04 extends the data range by 4\% in each direction.
   }
   \item{xTicks}{
@@ -128,8 +129,9 @@ scatterPlot(x, y,
 	calculation described in \code{yExpandBy}.
   }
   \item{yExpandBy}{
-	calculate \code{yAxisMin} and \code{yAxisMax} by multiplicatively
-	extending the data range in both directions by this amount.  Default
+    a single number or two numbers between 0 and 1. \code{yAxisMin} and
+    \code{yAxisMax} will be calculated by multiplicatively
+	extending the data range in both directions by these amounts.  Default
 	value .04 extends the data range by 4\% in each direction.
   }
   \item{yTicks}{

@@ -105,8 +105,9 @@ tisPlot(...,
 	calculation described in \code{xExpandBy}.
   }
   \item{xExpandBy}{
-	calculate \code{xAxisMin} and \code{xAxisMax} by multiplicatively
-	extending the data range in both directions by this amount.  Default
+    a single number or two numbers between 0 and 1. \code{xAxisMin} and
+    \code{xAxisMax} will be calculated by multiplicatively
+	extending the data range in both directions by these amounts.  Default
 	value .04 extends the data range by 4\% in each direction.
   }
   \item{xTickFreq}{
@@ -185,10 +186,10 @@ tisPlot(...,
 	calculation described in \code{leftExpandBy}.
   }
   \item{leftExpandBy}{
-	calculate \code{leftAxisMin} and \code{leftAxisMax} by multiplicatively
-	extending the data range of the leftAxis series in both directions
-	by this amount.  Default value .04 extends the data range by 4\% in
-	each direction. 
+    a single number or two numbers between 0 and 1. \code{leftAxisMin} and
+    \code{leftAxisMax} will be calculated by multiplicatively
+	extending the data range in both directions by these amounts.  Default
+	value .04 extends the data range by 4\% in each direction.
   }
   \item{leftTicks}{
 	number of ticks to draw on left axis at "pretty" locations.  Default
@@ -218,10 +219,10 @@ tisPlot(...,
 	calculation described in \code{rightExpandBy}.
   }
   \item{rightExpandBy}{
-	calculate \code{rightAxisMin} and \code{rightAxisMax} by multiplicatively
-	extending the data range of the rightAxis series in both directions
-	by this amount.  Default value .04 extends the data range by 4\% in
-	each direction. 
+    a single number or two numbers between 0 and 1. \code{rightAxisMin} and
+    \code{rightAxisMax} will be calculated by multiplicatively
+	extending the data range in both directions by these amounts.  Default
+	value .04 extends the data range by 4\% in each direction.
   }
   \item{rightTicks}{
 	number of ticks to draw on right axis at "pretty" locations.  Default

@@ -58,7 +58,6 @@ screenPage <- function(head = NULL,
   subCex  <- cex * subCex
   footCex <- cex * footCex
   ## topRight (Upper Right Corner text) will hold date and time
-  topRight <- character(0)
   if(is.character(date))
     topRight <- c(topRight, date)
   else

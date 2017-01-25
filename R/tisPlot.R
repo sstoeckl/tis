@@ -178,11 +178,14 @@ tisPlot <- function(## series args
   
   expandRange <- function(inRange, expandBy = 0.04, log = FALSE){
     ## local function
+    expandBy <- rep(expandBy, len = 2)
     z <- unclass(inRange)
     if(length(z) != 2) stop("length(inRange) != 2")
     if(!log){
-      addFactor <- expandBy * (z[2] - z[1])
-      ans <- z + c(-addFactor, addFactor)
+      rng <- z[2] - z[1]
+      leftAddFactor <- expandBy[1] * rng
+      rightAddFactor <- expandBy[2] * rng
+      ans <- z + c(-leftAddFactor, rightAddFactor)
     }
     else
       ans <- exp(Recall(log(z), expandBy, log = FALSE))

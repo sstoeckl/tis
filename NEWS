@@ -1,3 +1,23 @@
+Changes in Version 1.32
+
+  o tisPlot() and scatterPlot() parameters xExpandBy, leftExpandBy,
+    rightExpandBy and yExpandBy can now be a vector of two numbers to expand the
+    data range asymmetrically.
+
+  o tisFromCsv() was bombing when dateFormat = "excel" was given.
+
+  o created a non-exported is.numeric.ti() that returns FALSE and explicitly
+    exported as.Date.jul and as.Date.ti to prevent the zoo package's 
+    reimplementation of the generic as.Date from incorrectly sending ti
+    arguments to zoo::as.Date.numeric(). 
+
+Changes in Version 1.31
+
+  o Added 'offset' arg to as.Date.ti, and 'origin' arg to as.Date.jul. Request
+    of Andre Mikulec.
+
+  o Fixed minor bug in barplot.tis()
+
 Changes in Version 1.30
 
   o Added tis methods for head() and tail().

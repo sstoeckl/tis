@@ -408,6 +408,7 @@ ti.default <- function(x, tif = NULL, freq = NULL, ...){
 }
 
 couldBeTi <- function(x, tif = NULL){
+  if(inherits(x, "ti")) return(TRUE)
   perhaps <- is.numeric(x) && (all(is.finite(x)) & between(x, 1e13, 5e13))
   if(!perhaps) return(FALSE)
   if(is.null(tif)) return(TRUE)
@@ -449,6 +450,8 @@ as.list.ti <- function(x, ...){
 }
 c.ti <- function(..., recursive = F)
   structure(c(unlist(lapply(list(...), unclass))), class = "ti")
+
+is.numeric.ti <- function(x) FALSE
 
 min.ti <- function(..., na.rm = F)
   structure(min(unlist(lapply(list(...), unclass)), na.rm = na.rm), class = "ti")
@@ -562,8 +565,10 @@ weekdays.default <- function(x, ...) weekdays(as.Date(x), ...)
 months.default   <- function(x, ...) months(as.Date(x), ...)
 quarters.default <- function(x, ...) quarters(as.Date(x), ...)
 
-as.Date.jul <- function(x, ...) structure(x - 2440588, class = "Date")
-as.Date.ti  <- function(x, ...) as.Date(jul(x), ...)
+as.Date.jul <- function(x, origin = "1970-01-01", ...){
+  as.Date(x = x - jul(origin), origin = origin, ...)
+}
+as.Date.ti  <- function(x, offset = 1, ...) as.Date(jul(x, offset), ...)
 
 as.POSIXct.jul <- function(x, tz = "", ...){
   do.call("ISOdatetime", c(ymdhms(x), tz = tz))
@@ -1072,9 +1077,20 @@ secondly <- function(n = 0){
 }
 
 ## Support functions
-isLeapYear    <- function(y) y %% 4 == 0 & (y %% 100 != 0 | y %% 400 == 0)
-is.ymd        <- function(x) all(between(x, 15830101, 29991231), na.rm = T)
-julToWeekday  <- function(jul){
+isLeapYear <- function(y){
+  y %% 4 == 0 & (y %% 100 != 0 | y %% 400 == 0)
+}
+
+is.ymd <- function(x){
+  year <- x %/% 10000
+  mon  <- (x - year*10000) %/% 100
+  day  <- x %% 100
+  all((between(year, 1583, 9999) &
+       between(mon, 1, 12) &
+       between(day, 1, 31)), na.rm = T)
+}
+
+julToWeekday <- function(jul){
   ## Sun = 1, Sat = 7.  2415020 = Sunday, 12/31/1899
   ((unclass(jul) - 2415020) %% 7) + 1
 }

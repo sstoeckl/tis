@@ -31,7 +31,7 @@ tisFromCsv <- function(csvFile,
   
   zDateStrings <- as.character(zdf[[dateColIndex]])
   zdf <- zdf[-dateColIndex]
-  z <- as.matrix(zdf[,unlist(lapply(zdf, is.numeric)), drop = F])
+  z <- as.matrix(zdf[,unlist(lapply(zdf, function(x) {is.numeric(x) || is.ti(x)})), drop = F])
 
   if(!is.null(naNumber)){
     naSpots <- (1:length(z))[abs(z - naNumber) <= tolerance]
@@ -42,7 +42,7 @@ tisFromCsv <- function(csvFile,
   if(NCOL(z) == 0) stop("No non-NA values in file")
 
   if(tolower(dateFormat) == "excel")
-    dateTimes <- POSIXct(jul(as.ssDate(zdf[[dateColIndex]])))
+    dateTimes <- POSIXct(jul(as.ssDate(as.numeric(zDateStrings))))
   else {
     if(length(grep("%d", dateFormat)) == 0){
       dateFormat <- paste(dateFormat, "%d")

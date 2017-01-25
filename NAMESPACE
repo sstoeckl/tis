@@ -1,10 +1,13 @@
 import(utils)
 import(graphics)
 import(stats)
+importFrom("grDevices", "dev.cur", "dev.flush", "dev.hold", "dev.list",
+           "dev.off", "extendrange", "grey", "grey.colors", "palette",
+           "postscript", "xy.coords")
 
 useDynLib(tis)
 export(adjustableTierChart, asClassyList, asJul, asTi, assignList,
-       as.jul, as.ssDate,
+       as.Date.jul, as.Date.ti, as.jul, as.ssDate,
        as.ti, as.tis, barplot2, basePeriod, basis, "basis<-", between,
        blanks, capitalize, columns, convert, couldBeTi, csv,
        currentSunday, currentMonday, currentTuesday, currentWednesday,
@@ -94,6 +97,7 @@ S3method(format, ti)
 S3method(frequency, ti)
 S3method(frequency, tis)
 S3method(head, tis)
+S3method(is.numeric, ti)
 S3method(jul, Date)
 S3method(jul, IDate)
 S3method(jul, default)

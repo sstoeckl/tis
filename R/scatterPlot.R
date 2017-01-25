@@ -107,11 +107,21 @@ scatterPlot <- function(x, y,
   ##  the figure margins (axes, titles, footnotes)
   ##  the lines and/or points representing the data
   ##  legends
-  expandRange <- function(inRange, expandBy = 0.04){
-    ## local function
-    if(length(inRange) != 2) stop("length(inRange) != 2")
-    addFactor <- expandBy * (inRange[2] - inRange[1])
-    return(inRange + c(-addFactor, addFactor))
+  expandRange <- function(inRange, expandBy = 0.04, log = FALSE){
+    ## local function same as in tisPlot()
+    expandBy <- rep(expandBy, len = 2)
+    z <- unclass(inRange)
+    if(length(z) != 2) stop("length(inRange) != 2")
+    if(!log){
+      rng <- z[2] - z[1]
+      leftAddFactor <- expandBy[1] * rng
+      rightAddFactor <- expandBy[2] * rng
+      ans <- z + c(-leftAddFactor, rightAddFactor)
+    }
+    else
+      ans <- exp(Recall(log(z), expandBy, log = FALSE))
+    class(ans) <- class(inRange)
+    return(ans)
   }
 
   ## set xRange and yRange
@@ -349,7 +359,7 @@ scatterPlot <- function(x, y,
   z <- list(xy = xy, plotType = plotType, lineType = lineType,
             color = color, plotChar = plotChar, lineWidth = lineWidth,
             x = legend.x, y = legend.y, xRange = xRange, yRange = yRange,
-            innerCex = innerCex, par = par())
+            innerCex = innerCex, cex = cex, par = par())
 
   ## restore par() parameters except for "plt" which must keep its
   ## new value

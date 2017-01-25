@@ -33,10 +33,11 @@ barplot.tis <- function(height, ...){
       zw <- zWidth - space * avg
     }
     zWidth <- zw
+    space <- (space + c(0, space[-length(space)]))/2
   }
   nonSeriesArgs$space <- space
 
-  x.offset <- min(time(asTi(sapply(series, start)) - 1)) + zWidth[1]
+  x.offset <- min(time(asTi(sapply(series, start)) - 1))
   add <- is.logical(nonSeriesArgs$add) && nonSeriesArgs$add
   if(add){
     zArgs <- updateList(list(height = zHeight,
