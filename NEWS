@@ -1,3 +1,14 @@
+Changes in Version 1.34
+
+  o Add tis_init.c to eliminate note in cran checks
+
+Changes in Version 1.33
+
+  o adjusted convert to properly account for period bounderies when using businessday   
+    data types from fame
+
+  o Removed format.POSIXct, format.POSIXlt, format.default from being exported
+
 Changes in Version 1.32
 
   o tisPlot() and scatterPlot() parameters xExpandBy, leftExpandBy,

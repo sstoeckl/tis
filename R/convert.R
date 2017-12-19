@@ -22,6 +22,8 @@ convert <- function(x, tif, method = "constant", observed. = observed(x),
   basis(x) <- basis.
   basis.   <- basis(x)
 
+  if(observed.=="business") basis. <- "business"
+  
   bTif <- basis(x)
   xTif <- tif(x)
   agg <- (frequency(x) >= frequency(ti(tif = tif)))
@@ -112,7 +114,7 @@ convert <- function(x, tif, method = "constant", observed. = observed(x),
                                   y = x[,i], 
                                   xout = obasis,
                                   method = "constant",
-                                  f = 0,
+                                  f = 0, #could arguably be 1 however it is not definitive so leaving as is.
                                   rule = 2)$y
              }
              yy <- tis(vals, start=ostart)
@@ -128,14 +130,14 @@ convert <- function(x, tif, method = "constant", observed. = observed(x),
                oend <- ti(jul(idates[n]) + 1, tif) - 1
            
              odates <- seq(ostart, oend)
-             obasis <- ti(jul(odates), bTif)
+             obasis <- ti(jul(odates), bTif,businessMonday=FALSE)
              vals <- matrix(0, length(obasis), m)
              for(i in 1:m){
                vals[,i] <- approx(x = ibasis, 
                                   y = x[,i], 
                                   xout = obasis,
                                   method = "constant",
-                                  f = 1,
+                                  f = 0, #changed from 1 to 0 so it doesn't look into the future (Which may not exist)
                                   rule = 2)$y
              }
              yy <- tis(vals, start=ostart)
@@ -156,8 +158,8 @@ convert <- function(x, tif, method = "constant", observed. = observed(x),
              odates <- seq(ostart, oend)
            
              ## Basis-day borders for the input and output series
-             iborders <- ti(jul(c(idates[1]-1, idates)), bTif)
-             oborders <- ti(jul(c(odates[1]-1, odates)), bTif)
+             iborders <- ti(jul(c(idates[1]-1, idates)), bTif,businessMonday=FALSE)
+             oborders <- ti(jul(c(odates[1]-1, odates)), bTif,businessMonday=FALSE)
            
              idays <- diff(iborders) ## basis days per period of input series
              odays <- diff(oborders) ## basis days per period of output series
@@ -206,7 +208,7 @@ convert <- function(x, tif, method = "constant", observed. = observed(x),
              oend <- ti(jul(idates[n]) + 1, tif) - 1
            
              odates <- seq(ostart, oend)
-             obasis <- ti(jul(odates), bTif)
+             obasis <- ti(jul(odates), bTif,businessMonday=FALSE)
              vals <- matrix(0, length(obasis), m)
              for(i in 1:m){
                vals[,i] <- approx(x = ibasis, 
@@ -228,8 +230,8 @@ convert <- function(x, tif, method = "constant", observed. = observed(x),
              odates <- seq(ostart, oend)
            
              ## Basis-day borders for the input and output series
-             iborders <- ti(jul(c(idates[1]-1, idates)), bTif)
-             oborders <- ti(jul(c(odates[1]-1, odates)), bTif)
+             iborders <- ti(jul(c(idates[1]-1, idates)), bTif,businessMonday=FALSE)
+             oborders <- ti(jul(c(odates[1]-1, odates)), bTif,businessMonday=FALSE)
            
              idays <- diff(iborders) ## basis days per period of input series
              odays <- diff(oborders) ## basis days per period of output series
@@ -285,7 +287,7 @@ convert <- function(x, tif, method = "constant", observed. = observed(x),
              oend <- ti(jul(idates[n]) + 1, tif) - 1
            
              odates <- seq(ostart, oend)
-             obasis <- ti(jul(odates), bTif)
+             obasis <- ti(jul(odates), bTif,businessMonday=FALSE)
            
              ostart.b <- obasis[1]
              oend.b   <- obasis[length(obasis)]

@@ -230,7 +230,7 @@ window.tis <- function(x, start = NULL, end = NULL, extend = FALSE, noWarn = FAL
     if (yEnd >= xEnd) 
       hix.index <- NROW(x)
     else
-      hix.index <- 1 + xStart - xEnd
+      hix.index <- 1 + yEnd - xStart #change per Luke Van Cleve
     hiz.index <- loz.index + (hix.index - lox.index + 1) - 1
     if(isMat)
       z[loz.index:hiz.index,]<- x[lox.index:hix.index, , drop = F]

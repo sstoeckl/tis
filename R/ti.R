@@ -30,7 +30,7 @@ day    <- function(x, ...) floor(ymd(x, ...) %% 100)
 quarter <- function(x, ...) (month(x, ...) + 2) %/% 3
 
 ##From julian date to others
-jul2ti <- function(jul, tif){
+jul2ti <- function(jul, tif,...){
   tifLen <- length(tif)
   if(tifLen > 1 && length(uniq <- unique(tif)) > 1){
     n <- max(length(jul), tifLen)
@@ -39,11 +39,11 @@ jul2ti <- function(jul, tif){
     ans <- asTi(unclass(juln))
     for(u in uniq){
       index <- tifn == u
-      ans[index] <- julToTi(juln[index], u)
+      ans[index] <- julToTi(juln[index], u,...)
     }
     return(ans)
   }
-  else return(julToTi(jul, tif[1]))
+  else return(julToTi(jul, tif[1],...))
 }
 
 jul2ymd <- function(jul){
@@ -351,7 +351,7 @@ ti.jul <- function(x, tif = NULL, freq = NULL,
     if(!(missing(hour) && missing(minute) && missing(second)))
       x[intraday] <- (floor(x + .5/86400) + (3600*hour + 60*minute + second)/86400)[intraday]
   }
-  return(jul2ti(x, tif))
+  return(jul2ti(x, tif,...))
 }
 
 ti.POSIXlt <- function(x, tif, ...){
@@ -665,7 +665,7 @@ baseYmd <- function(tif){
 }
 
 ## workhorse functions that convert ti's back and forth to ymd and jul
-julToTi <- function(jul, tif, must.handle=F){
+julToTi <- function(jul, tif, must.handle=F, businessMonday=TRUE){
   nTif <- tif(tif)
   j <- unclass(jul)
   if(any(jul2ymd(jul) < baseYmd(nTif)))
@@ -684,7 +684,11 @@ julToTi <- function(jul, tif, must.handle=F){
                      ## 2 = business day
                      { 
                        dow <- julToWeekday(j)
-                       j <- j + (dow==1) + 2*(dow==7)
+                       if(businessMonday==TRUE) {
+                          j <- j + (dow==1) + 2*(dow==7)
+                       } else {
+                          j <- j - (dow==7) - 2*(dow==1)
+                       }
                        ((j - 2415021)%/%7)*5 + (j - 2415020)%%7
                      },
                      ## 3 - 9 = weeklySunday thru weeklySaturday

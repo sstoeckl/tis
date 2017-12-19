@@ -1,6 +1,6 @@
-9c7ec713e34c7242f2c4970e3b81396b *DESCRIPTION
-f846ee6a636fe3b526e6c25a7478ca92 *NAMESPACE
-9ca19ba62b3c37d45fbeaa35c2bb3c8b *NEWS
+862de6dd13a9f8493280794d3f77a9db *DESCRIPTION
+f6cc5c4b91a46d89a2c344212c5de97f *NAMESPACE
+19706e81874fe77acc3f54cf10ef7788 *NEWS
 a867083d3a728e4969dbd3c205c1eeb1 *R/Lag.R
 e3405b4e53160c80f06062a70d55ed6f *R/RowSums.R
 e5a9ac6c4a4d27bbc52d6275a0502c90 *R/asClassyList.R
@@ -11,7 +11,7 @@ cd92627b22e33daf370d569843f9cd0e *R/barplot.tis.R
 899d2950c1919dae6ae5993f6c4080fd *R/capitalize.R
 f69878685cfecbc1b33a64e0d1dced08 *R/constantGrowthSeries.R
 01c03dc19b93f48ba307709612f1a3a4 *R/convenientTi.R
-9515c96067a9359cd76f6038fffba6e4 *R/convert.R
+b632e4a08b8f156b375fb29f644b76b4 *R/convert.R
 9a6ba086fadd6281552b1251255311eb *R/csv.R
 0006c200288eb6eed9156bd8b85b84f5 *R/description.R
 28f3e3f9f423797dd700d1041d0c57f4 *R/edit.R
@@ -35,10 +35,10 @@ e0461a4ffb09b5d9a1c38d84af26d8a2 *R/setColors.R
 77fcb01bc85f647bcd89407e8d60e923 *R/solve.tridiag.R
 78d5c75f5506bf525025542bdaeb185a *R/stringFunctions.R
 a81d54bdb0c7cc1888e247bb659493f9 *R/stripClass.R
-71368c44e7f31dee9c6608781eda7001 *R/ti.R
+c233f824e9306e0fcce7e1827b4900d3 *R/ti.R
 11b520303cee54ed19fbb0c399825232 *R/tier.R
 a8f52e1857f4f7c57d81f282ca8cec3c *R/time.R
-d67951a446a285a910c453cd3f07fbb0 *R/tis.R
+d12903c3d626b404e424c1a9d2776387 *R/tis.R
 50809a2cc7c984fa99d7bb2ff744b840 *R/tisFromCsv.R
 36c1dc8b0aa38644f48eab31a49ad8d5 *R/tisPlot.R
 89bb036a85a0051ae2f4384af06a5ca2 *R/updateColumns.R
@@ -129,3 +129,4 @@ b5846304afcc8eca4cd0c03a46b98580 *man/ymd.Rd
 fd7258049e62451d27fbc5d8cd4c821a *src/Makevars.win
 21d988f9e3cfd3ff59d66e27e6030d85 *src/dgtsv.c
 b103105a5d5e7fe8d8037bf8c202e2e2 *src/lintegrate.c
+fd573be2a5eb0064b5a9fa4d7c229da0 *src/tis_init.c
