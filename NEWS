@@ -1,3 +1,17 @@
+Changes in Version 1.37
+
+  o Adjust some more examples
+  o Fix couldBeTi  
+
+Changes in Version 1.36
+
+  o Adjust some examples
+
+Changes in Version 1.35
+
+  o Remove makevars files to comply with cran
+  o add in check in baseYmd to make sure tif is a whole number
+
 Changes in Version 1.34
 
   o Add tis_init.c to eliminate note in cran checks

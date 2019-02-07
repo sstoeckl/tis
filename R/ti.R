@@ -409,7 +409,7 @@ ti.default <- function(x, tif = NULL, freq = NULL, ...){
 
 couldBeTi <- function(x, tif = NULL){
   if(inherits(x, "ti")) return(TRUE)
-  perhaps <- is.numeric(x) && (all(is.finite(x)) & between(x, 1e13, 5e13))
+  perhaps <- all(is.numeric(x)) && all(is.finite(x)) && all(between(x, 1e13, 5e13))
   if(!perhaps) return(FALSE)
   if(is.null(tif)) return(TRUE)
   else {
@@ -634,6 +634,7 @@ as.POSIXlt.ti   <- function(x, ...) POSIXlt(x, ...)
 
 baseYmd <- function(tif){
   nTif <- tif(tif)
+  
   if(between(nTif, 1001, 1050)){
     c(## daily, business day
       18991230, 18991229,
@@ -661,7 +662,13 @@ baseYmd <- function(tif){
   else {
     if(between(nTif, 2000, 4900)) 19800101
     else stop(paste("unknown nTif:", nTif))
+    
+    #add in check to make sure tif is a whole number
+    if(!as.integer(nTif)==nTif) {
+      stop(paste("Tif must be whole number:", nTif))
+    }
   }
+  
 }
 
 ## workhorse functions that convert ti's back and forth to ymd and jul
