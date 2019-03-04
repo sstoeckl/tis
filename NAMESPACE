@@ -184,3 +184,7 @@ S3method(ymd, ssDate)
 S3method(ymd, ti)
 ## not exported
 ## barplot2
+
+if(getRversion() >= "3.6.0") {
+  S3method(ggplot2::fortify, "tis")
+}
