@@ -7,7 +7,8 @@ nberShade.ggplot <- function(gg = ggplot2::last_plot(),
                              openShade = TRUE, ...){
   Start <- End <- ymin <- ymax <-
     "Defined here to defeat 'no visible binding' R CMD check warnings"
-  yrng <- extendrange(eval(gg$mapping$y, gg$data))
+  yrng <- extendrange(dplyr::pull(dplyr::mutate(gg$data,new = !!gg$mapping$y),new))
+  #yrng <- extendrange(eval(gg$mapping$y, gg$data))
   nber.dates <- transform(data.frame(as.data.frame(nberDates()),
                                      ymin = yrng[1],
                                      ymax = yrng[2]), 
@@ -19,8 +20,7 @@ nberShade.ggplot <- function(gg = ggplot2::last_plot(),
       nr <- nrow(nber.dates)
       if(is.na(nber.dates[nr, "End"])) nber.dates[nr, "End"] <- Sys.Date()
     }  
-  }
-  else {
+  } else {
     xrange <- as.Date(xrange)
     nber.dates <- subset(nber.dates, (End > xrange[1]) | (is.na(End)))
     if(nber.dates[1, "Start"] < xrange[1]) 
@@ -33,16 +33,16 @@ nberShade.ggplot <- function(gg = ggplot2::last_plot(),
     }
   }
   
-  gg <- gg + ggplot2::geom_rect( ggplot2::aes(xmin = Start, xmax = End, x = NULL, y = NULL, 
+  gg2 <- gg + ggplot2::geom_rect( ggplot2::aes(xmin = lubridate::decimal_date(Start), xmax = lubridate::decimal_date(End), x = NULL, y = NULL, 
                                                 ymin = ymin, ymax = ymax), color = color, fill = fill, 
-                                 size = 0.5, alpha = 0.5, data = nber.dates) + 
+                                 size = 0.5, alpha = 0.5, data = dplyr::as_tibble(nber.dates)) + 
                                    ggplot2::scale_y_continuous(expand = c(0,0))
   
   if( ! openShade ){
     ## color = fill is the behavior in nberShade.default
-    gg <- gg + ggplot2::geom_vline(xintercept = as.numeric(tail(nber.dates, 1)$Start), 
+    gg2 <- gg + ggplot2::geom_vline(xintercept = as.numeric(tail(nber.dates, 1)$Start), 
                                     color = fill, size = 1.5)
   }
   
-  return(gg)
+  return(gg2)
 } 
